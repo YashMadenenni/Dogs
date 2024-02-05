@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 
 
 function App() {
-  const [data, setData] = React.useState(null);
+  const [data, setData] = useState(null);
 
-  React.useEffect(() => {
-    fetch("/api")
+  useEffect(() => {
+    console.log("React");
+    fetch("http://localhost:3001/allBreeds")
       .then((res) => res.json())
       .then((data) => setData(data.message));
   }, []);
