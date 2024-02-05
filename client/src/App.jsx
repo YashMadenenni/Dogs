@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+
+
 
 function App() {
   const [data, setData] = React.useState(null);
@@ -13,8 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="flex App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+      <header className="flex flex-col App-header">
         <p>{!data ? "Loading..." : data}</p>
       </header>
     </div>
