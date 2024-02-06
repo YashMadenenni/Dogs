@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  CreateDog,
+  Dog,
+  Home,
+  Navbar,
+  SearchDogs
+} from './components'
 
-
-
-function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    console.log("React");
-    fetch("http://localhost:3001/allBreeds")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
+const App = () => {
   return (
-    <div className="App">
-      <header className="flex flex-col App-header">
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
-    </div>
+    <BrowserRouter>
+     <div className="relative z-0 bg-gradient-to-r from-amber-400  via-yellow-300 to-amber-400">
+     <Navbar />
+      <Home />
+      <Routes>
+        <Route path="/" element={<SearchDogs />}></Route>
+        <Route path="/:name" element={<Dog />}></Route>
+      </Routes>
+      <>
+        <CreateDog />
+      </>
+     </div>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
