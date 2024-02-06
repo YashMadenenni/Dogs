@@ -21,7 +21,7 @@ const { ObjectId } = require('mongodb');
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.resolve(__dirname, '../client/build'))); - for deployment on render
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../client')));
 
 
 //MongoDB set up
@@ -197,7 +197,7 @@ function generateCustomId() {
   return n;
 }
 
-// Find if the ID is already exists
+// Find if the ID is already exists in DB 
 function checkId(randomId) {
  collectionBreeds.find({_id:randomId}).toArray()
  .then(doc =>{ 
@@ -205,7 +205,9 @@ function checkId(randomId) {
    });
 }
 
-//Create new Dog
+
+//curl -X POST -H "Content-Type: application/json" -d '{"name":"NewDogName","subcategory":false,"breed":null,"image_src":"","details":""}' http://localhost:3001/addDog
+//To Add new Dog
 app.post("/addDog", (request, respone) => {
   const newDogData = request.body;
   const newDogName = request.body.name;

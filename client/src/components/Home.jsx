@@ -5,7 +5,7 @@ import { dog3 } from "../assets";
 import { motion } from "framer-motion";
 // import { Icon } from "@iconify/react";
 import "../../src/index.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const Home = () => {
@@ -25,36 +25,37 @@ const Home = () => {
           setInitialRender(false);
         });
     }
-  }, [buttonClicked]);
+  }, [buttonClicked,initialrender]);
 
   return (
     <section className="relative w-full h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 
-      inset-0 top-[100px] max-w-7xl `}
+      inset-0 top-[65px] max-w-7xl `}
       >
         <div className="flex justify-center flex-col mt-10">
           <motion.div variants={textVariant()} className="text-center">
-            <p className={styles.heroHeadText}>Woof!</p>
+         
+           <p className={`${styles.heroHeadText} drop-shadow-[9px_0px_5px_#000000a3] `}>Woof!</p>
             <h2 className={styles.sectionSubText}>Did You Know?</h2>
           </motion.div>
 
-          <div className=" flex sm:flex-row flex-col-reverse mt-10">
+          <div className=" flex sm:flex-row flex-col-reverse">
             <motion.div
               variants={fadeIn("right", "spring", 1, 5)}
-              className=" mx-auto mt-5 "
+              className=" mx-auto "
               alt="user_image"
             >
               <img
-                className=" h-96 shadow-2xl rounded-t-full"
+                className="sm:h-[450px] h-60 shadow-2xl rounded-t-full"
                 src={dog3}
-                alt=""
+                alt="Dog"
               />
             </motion.div>
 
             <div className=" sm:w-1/2  w-full  flex flex-col gap-5 relative ">
-              <div className="flex flex-col justify-center items-center mt-5 absolute -top-16 -left-0.5 ">
-                <div className="w-5 h-5 rounded-full bg-[#a09e9b]" />
+              <div className="flex flex-col justify-center items-center mt-5 absolute -top-5 -left-2 ">
+                <div className="w-5 h-5 bg-[#a09e9b]" />
                 <div className="w-1 h-32 bg-gradient-to-t from-yellow-300 from-20% via-gray-300 to-gray-400   " />
               </div>
               <motion.p
@@ -64,13 +65,13 @@ const Home = () => {
                 {data}
               </motion.p>
 
-              <div className="">
+              {/* <div className=""> */}
                 <button
                   type="button"
                   className="text-white 
                   bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
                   hover:bg-gradient-to-br            
-                 font-medium 
+                  font-medium 
                   rounded-lg text-sm px-5 py-2.5 
                   text-center me-2 mb-2 inline-flex items-center justify-center w-40"
                   onClick={() => {
@@ -93,7 +94,7 @@ const Home = () => {
                     Browse More +
                   </button>
                 </Link> */}
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </div>
