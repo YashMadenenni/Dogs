@@ -22,7 +22,7 @@ const { ObjectId } = require('mongodb');
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.resolve(__dirname, '../client/build'))); - for deployment on render
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../client')));
 
 
 //MongoDB set up
@@ -155,6 +155,7 @@ app.get("/api", (request, response) => {
 
 //Send all Dogs information
 app.get("/allDogs", (request, respone) => {
+  
   collectionBreeds.find().toArray()
     .then(doc => {
       try {
@@ -288,5 +289,5 @@ app.delete("/deleteDog/:id", (request, response) => {
 
 // All other GET requests not handled before will return our React app
 app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  response.sendFile(path.resolve(__dirname, '../client', 'index.html')); //add build for production
 });

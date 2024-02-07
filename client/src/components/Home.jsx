@@ -8,6 +8,8 @@ import "../../src/index.css";
 // import { Link } from "react-router-dom";
 import { fadeIn, textVariant } from "../utils/motion";
 import {SectionWrapper} from "../hoc";
+import SearchDogs from "./SearchDogs";
+import CreateDog from "./CreateDog";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -29,6 +31,7 @@ const Home = () => {
   }, [buttonClicked,initialrender]);
 
   return (
+    <>
     <section className="relative w-full h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 
@@ -101,6 +104,10 @@ const Home = () => {
         </div>
       </div>
     </section>
+    <SearchDogs />
+    <CreateDog />
+    </>
+
   );
 };
 

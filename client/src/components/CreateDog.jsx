@@ -132,7 +132,7 @@ const CreateDog = () => {
           Submit Your Dog!
         </p>
 
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-col-reverse sm:flex-row justify-between gap-6">
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -213,11 +213,11 @@ const CreateDog = () => {
             <img
                 name="image"
               id="preview_img"
-              className=" h-96 w-96 object-cover rounded-3xl mt-20"
+              className=" h-96 w-96 object-cover rounded-3xl mt-10"
               src={dog4}
               alt="Preview"
             />
-            <p className="text-black font-medium mt-3">Preview Image</p>
+            <p className="text-black font-medium mt-3 ">Preview Image</p>
             
           </div>
         </div>
