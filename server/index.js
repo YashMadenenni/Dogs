@@ -11,7 +11,8 @@ const crypto = require("crypto");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+// Increase payload size limit (e.g., 10MB)
+app.use(express.json({ limit: '20mb' }));
 
 const username = encodeURIComponent("yashwanthkumarms11");
 const password = encodeURIComponent("1TG4wd26QXsdPLu1"); // pswrd 1TG4wd26QXsdPLu1
@@ -25,7 +26,6 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 
 
 //MongoDB set up
-console.log(username, password);
 const url = `mongodb+srv://${username}:${password}@dogbreedcluster.zyybtvl.mongodb.net/?retryWrites=true&w=majority`
 const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 let collectionBreeds = null; // initially null 
@@ -51,11 +51,11 @@ client.connect()
     console.log(`Error in connecting to Database ${url.replace(/:([^:@]{1,})@/, ':****@')}`, err);
   })
 
-  // .then(() => insertStarterDataBreeds()) //insert initial data after connecting
-  // .catch(err => console.log(`Could not insert data`, err))
+  //  .then(() => insertStarterDataBreeds()) //insert initial data after connecting
+  //  .catch(err => console.log(`Could not insert data`, err))
 
   .then(() => {
-    // updateDogData(); // Call the function to update dogData
+    //  updateDogData(); // Call the function to update dogData
 
     app.listen(API_PORT);
     console.log("Server Started in port:" + API_PORT);
@@ -116,10 +116,13 @@ async function updateDogData() {
     // console.log(dog.name);
     try {
       var image_src = await getDogImages(dog.name, dog.breed);
+      var friendly = n = crypto.randomInt(1, 5);
+      var activeness = n = crypto.randomInt(1, 5);
+      var security = n = crypto.randomInt(1, 5);
       // dog.image = image_src;
 
       const filter = { name: dog.name };
-      const update = { $set: { image_src: image_src } };
+      const update = { $set: { image_src: image_src , friendly:friendly,activeness:activeness, security:security } };
 
       collectionBreeds.updateOne(filter, update)
         .then(result => {

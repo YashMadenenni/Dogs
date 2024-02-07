@@ -1,12 +1,16 @@
 import React from "react";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import Compressor from 'compressorjs';
 
 import { styles } from "../styles";
 import { slideIn } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import Rating from "./Rating";
 import { dog4 } from "../assets";
+
+
+
 
 const CreateDog = () => {
   const formRef = useRef();
@@ -18,9 +22,19 @@ const CreateDog = () => {
     activeness: "",
     security: "",
   });
+  
+  //Image file Base64
+  const [file, setFile] = useState(dog4);
+
+  
+  // State to store rating values
+  const [friendlyRating, setFriendlyRating] = useState(null);
+  const [activenessRating, setActivenessRating] = useState(null);
+  const [securityRating, setSecurityRating] = useState(null);
 
   const [loading, setLoading] = useState(false);
 
+//Handle form value changes
   const handleChange = (e) => {
     const { target } = e;
     const { name, value } = target;
@@ -28,21 +42,25 @@ const CreateDog = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = (e) => {
 
+//Handle form submit
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     setLoading(true);
-//curl -X POST -H "Content-Type: application/json" -d '{"name":"NewDogName","subcategory":false,"breed":null,"image_src":"","details":""}' http://localhost:3001/addDog
- 
+
     var newDog = {
-        "name":form.name,
-        "subcategory":false,
-        "breed":null,
-        "image_src":form.image,
+        "name":(form.breed.length >0 ? form.name+" "+form.breed:form.name),
+        "subcategory":(form.breed.length >0 ? true:false),
+        "breed":(form.breed.length >0 ? form.breed:null),
+        "image_src": file,
         "details":"",
-        "friendly": form.friendly,
+        "friendly": friendlyRating,
+        "activeness": activenessRating,
+        "security": securityRating
     }
+
+    console.log(newDog);
 
     fetch('/addDog', {
         method: "POST",
@@ -50,10 +68,9 @@ const CreateDog = () => {
         body: JSON.stringify(newDog)
     }).then(response => {
         // response.json();
-        console.log(response.json())
         setLoading(false);
-        
-          if (response.ok) {
+
+        if (response.ok) {
             setForm({
                 name: "",
                 breed: "",
@@ -67,29 +84,38 @@ const CreateDog = () => {
           }else{
             window.alert("Faild!");
           }
-        
         })
-        .catch(err => {
-            
+        .catch(err => {            
             setLoading(false);
             console.error(err)})
-        
-
-   
   };
 
+//Preview file
   var loadFile = function (event) {
-    // var input = event.target;
-    // var file = input.files[0];
-    // var type = file.type;
+    var input = event.target;
+    var eventFile = input.files[0];
+    // var reader = new FileReader();
 
-    var output = document.getElementById("preview_img");
+    // reader.onload = function () {
+        var output = document.getElementById("preview_img");
+        // output.src = reader.result;
 
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function () {
-      URL.revokeObjectURL(output.src); // free memory
-    };
-  };
+        //compress file
+        new Compressor(eventFile, {
+            quality: 0.8, 
+            success: (compressedResult) => {
+              
+                // Set file data in React state
+                setFile(compressedResult);
+                output.src = URL.createObjectURL(compressedResult);
+            },
+          });
+        
+    // };
+
+    // reader.readAsDataURL(eventFile);
+};
+
 
   return (
     <div
@@ -146,25 +172,26 @@ const CreateDog = () => {
 
             <label className="flex w-96 my-4">
               <span className="text-black font-medium w-24">Friendly</span>
-              <Rating name="friendly" />
+              <Rating name="friendly" value={friendlyRating} setValue={setFriendlyRating}/>
             </label>
 
             <label className="flex w-96 my-4">
               <span className="text-black font-medium w-24">Activeness</span>
-              <Rating name="activeness" />
+              <Rating name="activeness" value={activenessRating} setValue={setActivenessRating}/>
             </label>
 
             <label className="flex w-96 my-4">
               <span className="text-black font-medium w-24 ">Security</span>
-              <Rating name="Secutity" />
+              <Rating name="Secutity" value={securityRating} setValue={setSecurityRating} />
             </label>
 
-            <label class="flex gap-4 my-4">
+            <label className="flex gap-4 my-4">
             <span className="text-black font-medium w-24 ">Image</span>
               <input
                 type="file"
-                onChange={(e) => loadFile(e)}
-                class="block w-full text-sm text-slate-500
+                name="image"
+                onChange={(e) => {loadFile(e); }}
+                className="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4
                         file:rounded-full file:border-0
                         file:text-sm file:font-semibold
@@ -182,11 +209,11 @@ const CreateDog = () => {
               {loading ? "Submitting..." : "Submit"}
             </button>
           </form>
-          <div class="text-center">
+          <div className="text-center">
             <img
                 name="image"
               id="preview_img"
-              class=" h-96 w-96 object-cover rounded-3xl mt-20"
+              className=" h-96 w-96 object-cover rounded-3xl mt-20"
               src={dog4}
               alt="Preview"
             />
