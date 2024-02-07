@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import "../../src/index.css";
 // import { Link } from "react-router-dom";
 import { fadeIn, textVariant } from "../utils/motion";
+import {SectionWrapper} from "../hoc";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -31,18 +32,18 @@ const Home = () => {
     <section className="relative w-full h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 
-      inset-0 top-[65px] max-w-7xl `}
+      inset-0 max-w-7xl `}
       >
-        <div className="flex justify-center flex-col mt-10">
+        <div className="flex justify-center flex-col mt-5">
           <motion.div variants={textVariant()} className="text-center">
          
            <p className={`${styles.heroHeadText} drop-shadow-[9px_0px_5px_#000000a3] `}>Woof!</p>
             <h2 className={styles.sectionSubText}>Did You Know?</h2>
           </motion.div>
 
-          <div className=" flex sm:flex-row flex-col-reverse">
+          <div className=" flex sm:flex-row flex-col">
             <motion.div
-              variants={fadeIn("right", "spring", 1, 5)}
+              variants={fadeIn("up", "spring", 0, 2)}
               className=" mx-auto "
               alt="user_image"
             >
@@ -54,12 +55,12 @@ const Home = () => {
             </motion.div>
 
             <div className=" sm:w-1/2  w-full  flex flex-col gap-5 relative ">
-              <div className="flex flex-col justify-center items-center mt-5 absolute -top-5 -left-2 ">
+              <motion.div variants={fadeIn("up", " spring", 0, 2)} className="flex flex-col justify-center items-center mt-5 absolute -top-5 -left-2  ">
                 <div className="w-5 h-5 bg-[#a09e9b]" />
-                <div className="w-1 h-32 bg-gradient-to-t from-yellow-300 from-20% via-gray-300 to-gray-400   " />
-              </div>
+                <div className="w-1 h-32  sm:bg-gradient-to-t from-yellow-300 from-20% via-gray-300 to-gray-400    " />
+              </motion.div>
               <motion.p
-                variants={fadeIn("up", " spring", 1, 5)}
+                variants={fadeIn("left", " spring", 0.5, 1.5)}
                 className=" h-90 p-5 shadow-xl my-auto justify-center text-[25px] text-[#e57926] font-medium lg:text-[25px] sm:text-[20px] xs:text-[15px] lg:leading-[40px] "
               >
                 {data}
@@ -103,4 +104,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default SectionWrapper(Home,"home");
