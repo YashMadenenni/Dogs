@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import {  FaStar } from 'react-icons/fa';
+import {  FaPaw } from 'react-icons/fa';
 
 const Rating = ({ name, value, setValue }) => {
     const [rating,setRating] = useState(null);
@@ -12,7 +12,7 @@ const Rating = ({ name, value, setValue }) => {
       };
 
     return (
-        <div className='flex cursor-hand'>
+        <div className='flex cursor-hand gap-2'>
            {[...Array(5)].map((star,index)=>{
             
             const currentRating = index + 1;
@@ -25,7 +25,7 @@ const Rating = ({ name, value, setValue }) => {
                         checked={currentRating === value}
                         onChange={(e) => {handleChange(e); setRating(currentRating)}}
                         />
-                        <FaStar
+                        <FaPaw
                          className= {`${currentRating <= (hover || rating) ? " text-amber-600" : " text-slate-400"  } cursor-pointer`}
                          size={30}
                          onMouseEnter={() => setHover(currentRating)}

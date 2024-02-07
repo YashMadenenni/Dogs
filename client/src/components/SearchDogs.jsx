@@ -27,8 +27,8 @@ import React from 'react';
 
 const SearchDogs = () => {
     return (
-        <div>
-            Search
+        <div className='bg-white h-96'>
+            
         </div>
     );
 }
