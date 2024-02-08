@@ -26,7 +26,7 @@ const Rating = ({ name, value, setValue }) => {
                         onChange={(e) => {handleChange(e); setRating(currentRating)}}
                         />
                         <FaPaw
-                         className= {`${currentRating <= (hover || rating) ? " text-amber-600" : " text-slate-400"  } cursor-pointer`}
+                         className= {`${(currentRating) <= (hover || rating) ? " text-amber-600" : " text-slate-400"  } cursor-pointer`}
                          size={30}
                          onMouseEnter={() => setHover(currentRating)}
                          onMouseLeave={() => setHover(null)}

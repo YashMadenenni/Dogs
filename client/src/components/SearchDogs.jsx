@@ -66,7 +66,9 @@ var ComboBox = () => {
         <>       
            {dogs ? (
         <>
+        <div className=" absolute right-0 -top-4">
         <ComboBox />
+        </div>
         <ul className=" flex flex-wrap justify-between gap-1 ">
           {dogs.length > 0 ?dogs.map((dog, index) => (
             <li className={`${index>limit? "hidden": ""}`} key={index} >

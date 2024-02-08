@@ -8,7 +8,7 @@ import "../../src/index.css";
 // import { Link } from "react-router-dom";
 import { fadeIn, textVariant } from "../utils/motion";
 import {SectionWrapper} from "../hoc";
-// import SearchDogs from "./SearchDogs";
+ import SearchDogs from "./SearchDogs";
 import CreateDog from "./CreateDog";
 import Navbar from "./Navbar";
 
@@ -108,6 +108,7 @@ const Home = () => {
     </section>
     <CreateDog />
    
+   <SearchDogs />
     
     </>
 
