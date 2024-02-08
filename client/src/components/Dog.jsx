@@ -25,7 +25,7 @@ const Dog = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [dogID]);
 
   const getStars = (value) => {
     return (
@@ -79,7 +79,7 @@ const Dog = () => {
             </div>
 
             <form
-             
+             ref={ formRef}
               onSubmit={handleSubmit}
               className="flex flex-col gap-2 px-6 pb-2"
             >

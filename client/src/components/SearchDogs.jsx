@@ -16,7 +16,7 @@ useEffect(() => {
     console.log(reloadChild);
     fetchAllDogs();
       
-  }, [limit,reloadChild]);
+  }, [reloadChild]);
 
   const fetchAllDogs = () =>{
     fetch('/allDogs', {
@@ -25,33 +25,14 @@ useEffect(() => {
       .then((res) =>  res.json())
         .then((data) => {  
             // Limiting the display content to the first 10 items
-            const limitDogs = data.slice(0, limit);
-            setDogs(limitDogs);
+            // const limitDogs = data.slice(0, limit);
+            setDogs(data);
             console.log(data); // Log the resolved data
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
   }
-// const imageConversion = (imageBlob) =>{
-//     const reader = new FileReader();
-//     const dataURL = "";
-//     reader.onload = (e) =>{
-//         const dataURL = e.target.result;
-
-//     }
-//     return dataURL;
-// }
-
-// function isBlobUrl(url) {
-//     try {
-//         console.log(url)
-//       const urlObject = new URL(url);
-//       return urlObject.protocol === 'blob:';
-//     } catch (error) {
-//       return false;
-//     }
-//   }
 
 const dogOptions = dogs?dogs.map(dog => dog.name):[];
 
@@ -88,7 +69,7 @@ var ComboBox = () => {
         <ComboBox />
         <ul className=" flex flex-wrap justify-between gap-1 ">
           {dogs.length > 0 ?dogs.map((dog, index) => (
-            <li key={index} >
+            <li className={`${index>limit? "hidden": ""}`} key={index} >
              <Link className="flex flex-wrap my-3  rounded-3xl bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-600
             hover:bg-gradient-to-br" to={`/search/${dog._id}`}>
                    

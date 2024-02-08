@@ -232,7 +232,7 @@ const CreateDog = () => {
         </div>
       </motion.div>
     </div>
-    <SearchDogs reloadChild={2}/>
+    <SearchDogs reloadChild={reloadChild}/>
     </>
   );
 };
