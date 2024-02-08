@@ -8,6 +8,7 @@ import { slideIn } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import Rating from "./Rating";
 import { dog4 } from "../assets";
+import SearchDogs from "./SearchDogs";
 
 
 
@@ -26,6 +27,7 @@ const CreateDog = () => {
   //Image file Base64
   const [file, setFile] = useState(dog4);
 
+  const [reloadChild, setReloadChild] = useState(false);
   
   // State to store rating values
   const [friendlyRating, setFriendlyRating] = useState(null);
@@ -60,7 +62,7 @@ const CreateDog = () => {
         "security": securityRating
     }
 
-    console.log(newDog);
+    //console.log(newDog);
 
     fetch('/addDog', {
         method: "POST",
@@ -81,9 +83,12 @@ const CreateDog = () => {
               });
 
               window.alert("Success!");
+              
           }else{
             window.alert("Faild!");
           }
+
+          setReloadChild(!reloadChild);
         })
         .catch(err => {            
             setLoading(false);
@@ -110,17 +115,18 @@ const CreateDog = () => {
                 output.src = URL.createObjectURL(compressedResult);
             },
           });
-        
-    // };
+        console.log(typeof(file) )
+            // };
 
     // reader.readAsDataURL(eventFile);
 };
 
 
   return (
+    <>
     <div
       className="xl:mt-12 xl:flex-row
-        flex-col-reverse flex gap-10 overflow-hidden py-20"
+        flex-col-reverse flex gap-10 overflow-hidden my-20"
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 0.5)}
@@ -150,7 +156,9 @@ const CreateDog = () => {
             placeholder:text-secondary 
             text-black rounded-lg outlined-none
             border-none font-medium
+            focus:outline-none 
              "
+             required
               />
             </label>
 
@@ -166,6 +174,7 @@ const CreateDog = () => {
             placeholder:text-secondary 
             text-black rounded-lg outlined-none
             border-none font-medium
+            focus:outline-none
             "
               />
             </label>
@@ -223,6 +232,8 @@ const CreateDog = () => {
         </div>
       </motion.div>
     </div>
+    <SearchDogs reloadChild={2}/>
+    </>
   );
 };
 

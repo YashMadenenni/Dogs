@@ -173,6 +173,7 @@ app.get("/allDogs", (request, respone) => {
 
 // To Fetch dog with ID breeds
 app.get("/dog/:id", (request, response) => {
+  
   var id = parseInt(request.params.id);
 
   collectionBreeds.find({ _id: id }).toArray()
@@ -271,6 +272,8 @@ console.log(dogId);
 
 // Delete a dog by ID
 app.delete("/deleteDog/:id", (request, response) => {
+ 
+  console.log("Delete dog");
   const dogId = parseInt(request.params.id);
 
   collectionBreeds.deleteOne({ _id: dogId })

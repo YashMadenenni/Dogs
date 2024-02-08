@@ -11,8 +11,6 @@ const App = () => {
   return (
     <BrowserRouter>
      <div className="relative z-0 bg-gradient-to-r from-amber-400  via-yellow-300 to-amber-400">
-     <Navbar />
-      
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search/:dogID" element={<Dog />} />

@@ -10,6 +10,7 @@ import { fadeIn, textVariant } from "../utils/motion";
 import {SectionWrapper} from "../hoc";
 import SearchDogs from "./SearchDogs";
 import CreateDog from "./CreateDog";
+import Navbar from "./Navbar";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -32,6 +33,7 @@ const Home = () => {
 
   return (
     <>
+    <Navbar />
     <section className="relative w-full h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 
@@ -104,8 +106,9 @@ const Home = () => {
         </div>
       </div>
     </section>
-    <SearchDogs />
     <CreateDog />
+   
+    
     </>
 
   );

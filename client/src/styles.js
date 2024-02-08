@@ -1,7 +1,7 @@
 var styles = {
     paddingX: "sm:px-16 px-6",
     paddingY: "sm:py-16 py-6",
-    padding: "sm:px-16 px-6 sm:py-16 py-10",
+    padding: "sm:px-16 px-6 sm:py-8 py-10",
   
     heroHeadText:
       "font-black text-white lg:text-[60px] sm:text-[40px] xs:text-[30px] text-[60px] lg:leading-[98px] mt-2",
@@ -12,6 +12,8 @@ var styles = {
       "text-white font-black sm:text-[40px] xs:text-[30px] text-[30px]",
     sectionSubText:
       "sm:text-[14px] text-[12px] text-secondary uppercase tracking-wider",
+    cardSubText:
+      "sm:text-[16px] text-[12px] text-black uppercase italic tracking-wider",
   };
 
   export { styles };
