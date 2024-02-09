@@ -89,15 +89,15 @@ const Dog = () => {
         initial='hidden'
         whileInView='show'
         viewport={{ once: true, amount: 0.1}} 
-        className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
+        className={`${styles.padding} sm:h-full h-screen w-full max-w-7xl mx-auto relative z-0 flex `}
       >
         <span className='hash-span' id="dog">
           &nbsp;
         </span>
-        <section className="flex w-full sm:mb-56">
+        <section className="flex sm:flex-row flex-col-reverse my-auto w-full sm:mb-56 ">
        
         <img
-          className="  w-34 h-60 mt-auto ms-auto sm:-mb-28 -me-2"
+          className=" sm:block hidden  w-34 h-60 mt-auto ms-auto sm:-mb-28 -me-2"
           src={dog7}
           alt="Dog-pointing"
         />
@@ -107,7 +107,7 @@ const Dog = () => {
           <img
             name="image"
             id="preview_img"
-            className=" h-60 sm:h-96 sm:w-96 w-[450px] object-cover rounded-3xl"
+            className="   sm:h-96 sm:w-96  object-fill sm:object-cover rounded-3xl"
             src={dog.image_src}
             alt="Dog"
           />
@@ -115,7 +115,7 @@ const Dog = () => {
           <form
             ref={formRef}
             // onSubmit={handleSubmit}
-            className="flex flex-col gap-2 px-6 pb-2"
+            className="flex flex-col gap-2 sm:px-6 p-4 sm:p-0 pb-2"
           >
             <label
               className={`${styles.sectionHeadText}  drop-shadow-[9px_0px_5px_#000000a3] text-center `}

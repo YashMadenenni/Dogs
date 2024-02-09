@@ -196,18 +196,18 @@ if (!isEdit) {
         initial='hidden'
         whileInView='show'
         viewport={{ once: true, amount: 0.1}} 
-        className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
+        className={` ${styles.padding} max-w-7xl mx-auto relative z-0 `}
       >
         <span className='hash-span' id="create">
           &nbsp;
         </span>
     <div
       className="xl:mt-12 xl:flex-row
-        flex-col-reverse flex gap-10 overflow-hidden my-20"
+        flex-col-reverse flex gap-10 overflow-hidden my-20  p-4"
     >
       <motion.div
         variants={slideIn("left", "tween", 0.2, 0.5)}
-        className="flex-[0.75] flex-col p-8 rounded-2xl bg-yellow-300 mx-auto"
+        className="flex-[0.75] flex-col bg-yellow-300 rounded-2xl  sm:p-8 p-4  mx-auto"
       >
        {isEdit? <p
           className={`${styles.sectionHeadText} drop-shadow-[9px_0px_5px_#000000a3] text-center`}
