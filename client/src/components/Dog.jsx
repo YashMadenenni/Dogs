@@ -106,7 +106,7 @@ const Dog = () => {
         />
         
 
-        <div className="  relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 sm:me-auto mx-auto sm:mx-0">
+        <div className="   relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 sm:me-auto mx-auto sm:mx-0">
           <img
             name="image"
             id="preview_img"
@@ -173,7 +173,9 @@ const Dog = () => {
       </motion.section>
         )
       ) : (
-        "Loading..."
+        <div className="h-screen"> 
+          "Loading..."
+        </div>
       )}
       
       
