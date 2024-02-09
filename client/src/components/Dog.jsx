@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaPaw, FaTrash, FaArrowLeft, FaPen } from "react-icons/fa";
 import { motion } from "framer-motion";
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { staggerContainer } from "../utils/motion";
 // import { SectionWrapper } from "../hoc";
@@ -175,7 +176,7 @@ const Dog = () => {
       ) : (
         <div className="flex h-screen">
           <div className=" m-auto"> 
-          Loading...
+          <CircularProgress color="inherit"/>
         </div>
         </div>
       )}
