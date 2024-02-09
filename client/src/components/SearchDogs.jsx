@@ -102,7 +102,7 @@ const SearchDogs = ({ reloadChild }) => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.1 }}
-              className={`   flex flex-col`}
+              className={`   flex flex-col mb-24`}
             >
               <span className="hash-span" id="search">
                 &nbsp;
