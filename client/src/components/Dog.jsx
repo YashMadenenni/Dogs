@@ -97,7 +97,7 @@ const Dog = () => {
         <section className="flex w-full sm:mb-56">
        
         <img
-          className="  w-34 h-60 mt-auto ms-auto -mb-28 -me-2"
+          className="  w-34 h-60 mt-auto ms-auto sm:-mb-28 -me-2"
           src={dog7}
           alt="Dog-pointing"
         />

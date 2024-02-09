@@ -9,6 +9,21 @@ const bodyParser = require('body-parser');
 const crypto = require("crypto");
 
 const app = express();
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, 'images'));
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+
+const upload = multer({ storage: storage });
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Increase payload size limit (e.g., 10MB)
@@ -146,6 +161,27 @@ async function updateDogData() {
   // console.log(dogData);
 }
 
+
+app.post("/image",upload.single("file"),async function (req,res) {
+  try {
+      console.log(req.file.path);
+      
+      console.log(path);
+      const imagePath = path.join(req.file.path);
+      imagePathCorrected = imagePath.split("\server")
+      console.log(imagePathCorrected[1])
+      // const imageUrl = req.file.path.replace("\\", "/");
+      // res.status(200).json({ url: `/${imageUrl}` });
+      imageUrlfinal =  imagePathCorrected[1].replace(/\\/g, '/');
+      console.log(path.join(__dirname, '/images'))
+      res.set(200).json({url:imageUrlfinal})
+  } catch (error) {
+      res.set(400).json({url:""})
+  }
+  //console.log(imagePath);
+
+
+})
 
 
 // Handle GET requests to /api route
@@ -290,7 +326,7 @@ app.delete("/deleteDog/:id", (request, response) => {
     });
 });
 
-// All other GET requests not handled before will return our React app
+// // All other GET requests not handled before will return our React app
 app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '../client/build', 'index.html')); //add build for production
 });

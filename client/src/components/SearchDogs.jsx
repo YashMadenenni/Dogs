@@ -4,6 +4,8 @@ import { SectionWrapper } from "../hoc";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import { motion } from "framer-motion";
+import { Paper, IconButton, Input } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 import { staggerContainer } from "../utils/motion";
 import { styles } from "../styles";
@@ -29,7 +31,8 @@ useEffect(() => {
       .then((res) =>  res.json())
         .then((data) => {  
             // Limiting the display content to the first 10 items
-            // const limitDogs = data.slice(0, limit);
+            // const limitDogs = data.slice(0, 18);
+            setLimit(20)
             setDogs(data);
             console.log(data); // Log the resolved data
           })
@@ -41,20 +44,49 @@ useEffect(() => {
 const dogOptions = dogs?dogs.map(dog => dog.name):[];
 
 var ComboBox = () => {
-    return (
-      <Autocomplete
-        disablePortal
-        value={value}
-        onChange={(event, newValue) => {
-          handleSearch(newValue);
-          setValue(newValue);
-        }}
-        id="combo-box"
-        options={dogOptions}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Search" />}
-      />
-    );
+  return (
+    <Autocomplete
+      disablePortal
+      value={value}
+      onChange={(event, newValue) => {
+        handleSearch(newValue);
+        setValue(newValue);
+      }}
+      id="combo-box"
+      options={dogOptions}
+      sx={{
+        width: 250,
+        '& .MuiAutocomplete-inputRoot': {
+          borderRadius: '20px',
+          backgroundColor: '#FFFFFF',
+        },
+        '& .MuiAutocomplete-input': {
+          padding: '10px',
+          color: 'black',
+        },
+      }}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          placeholder='Search...'
+          sx={{color: 'red' }}
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <IconButton size="small">
+                <SearchIcon sx={{color: 'red' }}  />
+              </IconButton>
+            ),
+            sx: {
+              '& input': {
+                color: 'black', // Customize text color
+              },
+            },
+          }}
+        />
+      )}
+    />
+  );
   }
 
   var handleSearch =(newValue)=>{
@@ -69,7 +101,7 @@ var ComboBox = () => {
     return (
         <>
         {
-          // reloadChild?reloadChild:!reloadChild &&
+          
            <>       
           {dogs ? (
        
@@ -78,17 +110,17 @@ var ComboBox = () => {
        initial='hidden'
        whileInView='show'
        viewport={{ once: true, amount: 0.1}}
-       className={`${styles.padding} max-w-7xl mx-auto relative z-0  flex flex-col`}
+       className={`   flex flex-col`}
      >
        <span className='hash-span' id="search">
          &nbsp; 
        </span>
-       <div className=" ms-auto ">
+       <div className=" sm:ms-auto ">
        <ComboBox />
        </div>
-       <ul className=" flex flex-wrap justify-between gap-1 ">
+       <ul className=" flex flex-wrap flex-row justify-between gap-1 ">
          {dogs.length > 0 ?dogs.map((dog, index) => (
-           <li className={`${index>limit? "hidden": ""}`} key={index} >
+           <li className={`${index>limit-1? "hidden": ""}`} key={index} >
             <Link className="flex flex-wrap my-3  rounded-3xl bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-600
            hover:bg-gradient-to-br" to={`/search/${dog._id}`}>
                   

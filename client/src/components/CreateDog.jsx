@@ -33,6 +33,7 @@ const CreateDog = ({editDog,isEdit,handleDelete}) => {
    const [securityRating, setSecurityRating] = useState(null);
  
    const [loading, setLoading] = useState(false);
+   
    const [form, setForm] = useState(() => {
     if (isEdit) {
       let { name, breed, image_src, friendly, activeness, security } = editDog;
@@ -160,34 +161,31 @@ if (!isEdit) {
 }
   };
 
-//Preview file
   var loadFile = function (event) {
     try {
-      var input = event.target;
-    var eventFile = input.files[0];
-    var reader = new FileReader();
+        var input = event.target;
+        var eventFile = input.files[0];
+        var reader = new FileReader();
 
-     reader.onload = function () {
-        // var output = document.getElementById("preview_img");
-        //  output.src = reader.result;
-        setFile(reader.result)
-        // //compress file
-        // new Compressor(eventFile, {
-        //     quality: 0.8, 
-        //     success: (compressedResult) => {
-              
-        //         // Set file data in React state
-        //         setFile(compressedResult);
-        //         output.src = URL.createObjectURL(compressedResult);
-        //     },
-        //   });
-        // console.log(typeof(file) )
-            // };
-    }} catch (error) {
-      console.log(error)
+        reader.onload = function () {
+            // Read the file data and store it in a variable
+            var fileData = reader.result;
+           // setFile(fileData);
+            // Compress the file using Compressor.js
+            new Compressor(eventFile, {
+                quality: 0.6,
+                success: (compressedResult) => {
+                    // Set the compressed file data in the React state
+                    setFile(compressedResult);
+                },
+            });
+        };
+
+        // Start reading the file
+        reader.readAsDataURL(eventFile);
+    } catch (error) {
+        console.log(error);
     }
-
-     reader.readAsDataURL(eventFile);
 };
 
 
@@ -227,7 +225,7 @@ if (!isEdit) {
             onSubmit={handleSubmit}
             className="mt-12 flex flex-col gap-4"
           >
-            <label className="flex flex-col w-96">
+            <label className="flex gap-2 sm:gap-0 sm:flex-col sm:w-96">
               <span className="text-black font-medium mb-2">Dog's Name</span>
               <input
                 type="text"
@@ -245,7 +243,7 @@ if (!isEdit) {
               />
             </label>
 
-            <label className="flex flex-col w-96">
+            <label className="flex gap-2 sm:gap-0 sm:flex-col sm:w-96">
               <span className="text-black font-medium mb-2">Dog's Breed</span>
               <input
                 type="text"
@@ -282,6 +280,7 @@ if (!isEdit) {
               <input
                 type="file"
                 name="image"
+                
                 onChange={(e) => {loadFile(e); }}
                 className="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4
@@ -322,11 +321,11 @@ if (!isEdit) {
             </button>
             }
           </form>
-          <div className="text-center">
+          <div className="text-center mx-auto">
             <img
                 name="image"
               id="preview_img"
-              className=" h-96 w-96 object-cover rounded-3xl mt-10"
+              className="h-40 w-40 sm:h-96 sm:w-96 object-cover rounded-3xl mt-10"
               src={file}
               alt="Preview"
             />
