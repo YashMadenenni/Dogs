@@ -10,7 +10,7 @@ import { staggerContainer } from "../utils/motion";
 import { styles } from "../styles";
 import { dog7 } from "../assets";
 import CreateDog from "./CreateDog";
-
+import { slideIn } from "../utils/motion";
 
 
 // import Rating from "./Rating";
@@ -97,17 +97,23 @@ const Dog = () => {
         <span className='hash-span' id="dog">
           &nbsp;
         </span>
-        <div className="flex sm:flex-row flex-col-reverse m-auto   ">
+        <div 
+        
+        className="flex sm:flex-row 
+        flex-col-reverse m-auto   ">
           
        
-        <img
+        <motion.img
+        variants={slideIn("up", "tween", 0.2, 0.5)}
           className=" sm:block hidden  w-34 h-60 mt-auto ms-auto sm:-mb-28 -me-2"
           src={dog7}
           alt="Dog-pointing"
         />
         
 
-        <div className="   relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 sm:me-auto mx-auto sm:mx-0">
+        <motion.div
+            variants={slideIn("right", "tween", 0.2, 0.5)}
+        className="   relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 sm:me-auto mx-auto sm:mx-0">
           <img
             name="image"
             id="preview_img"
@@ -169,7 +175,7 @@ const Dog = () => {
               </button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
       </motion.section>
         )

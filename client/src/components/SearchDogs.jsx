@@ -6,6 +6,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { motion } from "framer-motion";
 import { Paper, IconButton, Input } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import CircularProgress from '@mui/material/CircularProgress';
+import { FaCloudDownloadAlt  } from "react-icons/fa";
+import {fadeIn} from "../utils/motion";
 
 import { staggerContainer } from "../utils/motion";
 import { styles } from "../styles";
@@ -14,6 +17,8 @@ const SearchDogs = ({ reloadChild }) => {
   const [dogs, setDogs] = useState(null);
   const [limit, setLimit] = useState(156);
   const [value, setValue] = useState(null);
+  const [loader, setLoader] = useState(true);
+  const [initial, setInitial] = useState(true);
 
   useEffect(() => {
     // console.log(reloadChild);
@@ -86,7 +91,7 @@ const SearchDogs = ({ reloadChild }) => {
   };
 
   var handleSearch = (newValue) => {
-    console.log(newValue);
+    setInitial(false)
     var searchResult = dogs.filter((dog) => dog.name === newValue);
     setDogs(searchResult);
     newValue ? setValue(newValue) : fetchAllDogs();
@@ -96,7 +101,7 @@ const SearchDogs = ({ reloadChild }) => {
     <>
       {
         <>
-          {dogs ? (
+          {dogs && (
             <motion.section
               variants={staggerContainer()}
               initial="hidden"
@@ -113,13 +118,16 @@ const SearchDogs = ({ reloadChild }) => {
               <ul className=" flex flex-wrap flex-row sm:justify-between gap-1 ">
                 {dogs.length > 0 ? (
                   dogs.map((dog, index) => (
-                    <li
+                    <motion.li
+                       variants={  fadeIn("up", "spring", index *0.1, 1)}
+                        initial={`${initial?"hidden":""}`}
+                      whileInView={`${initial?"show":""}`}
                       className={`${index > limit - 1 ? "hidden" : ""} mx-auto`}
                       key={index}
                     >
                       <Link
                         className="flex flex-col sm:flex-row  my-3  rounded-3xl bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-600
-           hover:bg-gradient-to-br"
+                        hover:bg-gradient-to-br"
                         to={`/search/${dog._id}`}
                       >
                         <img
@@ -131,7 +139,9 @@ const SearchDogs = ({ reloadChild }) => {
                           {dog.name}
                         </span>
                       </Link>
-                    </li>
+                    </motion.li> || <button className="flex  gap-1  mx-auto text-3xl text-red-500 hover:text-blue-500 underline" onClick={()=>{limit<dogs.length?setLimit(limit+10):setLoader(false)}} >
+                 <p className="text-sm my-auto">Load more</p> <FaCloudDownloadAlt /> 
+              </button>
                   ))
                 ) : (
                   <li>
@@ -153,12 +163,13 @@ const SearchDogs = ({ reloadChild }) => {
                   </li>
                 )}
               </ul>
+              {loader?(<>
+                <button className="flex  gap-1  mx-auto text-3xl text-red-500 hover:text-blue-500 underline" onClick={()=>{limit<dogs.length?setLimit(limit+10):setLoader(false)}} >
+                 <p className="text-sm my-auto">Load more</p> <FaCloudDownloadAlt /> 
+              </button>
+              </>):<></>}
             </motion.section>
-          ) : (
-            <div className="flex h-screen">
-              <div className=" m-auto">Loading...</div>
-            </div>
-          )}
+          ) }
         </>
       }
     </>
