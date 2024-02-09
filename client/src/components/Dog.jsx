@@ -110,7 +110,7 @@ const Dog = () => {
           <img
             name="image"
             id="preview_img"
-            className=" h-60 sm:h-96 sm:w-96  object-cover sm:object-cover rounded-3xl"
+            className=" h-60 p-1 sm:p-0 sm:h-96 sm:w-96  object-cover sm:object-cover rounded-3xl"
             src={dog.image_src}
             alt="Dog"
           />

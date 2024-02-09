@@ -107,7 +107,7 @@ const SearchDogs = ({ reloadChild }) => {
               <span className="hash-span" id="search">
                 &nbsp;
               </span>
-              <div className=" sm:ms-auto mx-auto sm:mx-0">
+              <div className=" sm:ms-auto mx-auto sm:mx-0 mb-8">
                 <ComboBox />
               </div>
               <ul className=" flex flex-wrap flex-row sm:justify-between gap-1 ">
