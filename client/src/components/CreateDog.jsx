@@ -165,29 +165,29 @@ if (!isEdit) {
     try {
       var input = event.target;
     var eventFile = input.files[0];
-    // var reader = new FileReader();
+    var reader = new FileReader();
 
-    // reader.onload = function () {
-        var output = document.getElementById("preview_img");
-        // output.src = reader.result;
-
-        //compress file
-        new Compressor(eventFile, {
-            quality: 0.8, 
-            success: (compressedResult) => {
+     reader.onload = function () {
+        // var output = document.getElementById("preview_img");
+        //  output.src = reader.result;
+        setFile(reader.result)
+        // //compress file
+        // new Compressor(eventFile, {
+        //     quality: 0.8, 
+        //     success: (compressedResult) => {
               
-                // Set file data in React state
-                setFile(compressedResult);
-                output.src = URL.createObjectURL(compressedResult);
-            },
-          });
-        console.log(typeof(file) )
+        //         // Set file data in React state
+        //         setFile(compressedResult);
+        //         output.src = URL.createObjectURL(compressedResult);
+        //     },
+        //   });
+        // console.log(typeof(file) )
             // };
-    } catch (error) {
+    }} catch (error) {
       console.log(error)
     }
 
-    // reader.readAsDataURL(eventFile);
+     reader.readAsDataURL(eventFile);
 };
 
 
@@ -327,7 +327,7 @@ if (!isEdit) {
                 name="image"
               id="preview_img"
               className=" h-96 w-96 object-cover rounded-3xl mt-10"
-              src={dog4}
+              src={file}
               alt="Preview"
             />
             <p className="text-black font-medium mt-3 ">Preview Image</p>
