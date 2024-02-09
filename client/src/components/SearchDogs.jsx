@@ -119,7 +119,7 @@ const SearchDogs = ({ reloadChild }) => {
                 {dogs.length > 0 ? (
                   dogs.map((dog, index) => (
                     <motion.li
-                       variants={  fadeIn("up", "spring", index *0.1, 1)}
+                       variants={  index < 20? fadeIn("up", "spring", index *0.1, 1): fadeIn("up", "spring", 1, 1)}
                         initial={`${initial?"hidden":""}`}
                       whileInView={`${initial?"show":""}`}
                       className={`${index > limit - 1 ? "hidden" : ""} mx-auto`}
