@@ -22,7 +22,7 @@ const { ObjectId } = require('mongodb');
 
 // Have Node serve the files for our built React app
 // app.use(express.static(path.resolve(__dirname, '../client/build'))); - for deployment on render
-app.use(express.static(path.resolve(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 
 //MongoDB set up
@@ -292,5 +292,5 @@ app.delete("/deleteDog/:id", (request, response) => {
 
 // All other GET requests not handled before will return our React app
 app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, '../client', 'index.html')); //add build for production
+  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html')); //add build for production
 });
