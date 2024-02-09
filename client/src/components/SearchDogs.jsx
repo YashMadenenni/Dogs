@@ -115,16 +115,16 @@ var ComboBox = () => {
        <span className='hash-span' id="search">
          &nbsp; 
        </span>
-       <div className=" sm:ms-auto ">
+       <div className=" sm:ms-auto mx-auto sm:mx-0">
        <ComboBox />
        </div>
-       <ul className=" flex flex-wrap flex-row justify-between gap-1 ">
+       <ul className=" flex flex-wrap flex-row sm:justify-between gap-1 ">
          {dogs.length > 0 ?dogs.map((dog, index) => (
-           <li className={`${index>limit-1? "hidden": ""}`} key={index} >
-            <Link className="flex flex-wrap my-3  rounded-3xl bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-600
+           <li className={`${index>limit-1? "hidden": ""} mx-auto`} key={index} >
+            <Link className="flex flex-col sm:flex-row  my-3  rounded-3xl bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-600
            hover:bg-gradient-to-br" to={`/search/${dog._id}`}>
                   
-           <img className="h-16 w-16 object-fit rounded-3xl" src={dog.image_src } alt={dog.name}  />
+           <img className="sm:h-16 sm:w-16 h-16  object-cover rounded-3xl" src={dog.image_src } alt={dog.name}  />
            <span className="text-white text-center font-medium text-sm w-28 py-2 mx-2">{dog.name} 
            </span>
             </Link>

@@ -45,10 +45,10 @@ const Home = () => {
         <span className='hash-span' id="create">
           &nbsp;
         </span>
-    <section className="relative w-full h-[600px] sm:h-screen mx-auto">
+    <section className="relative w-full h-[750px] sm:h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 
-      inset-0 max-w-7xl `}
+      inset-0 max-w-7xl top-8 sm:top-0`}
       >
         <div className="flex justify-center flex-col mt-5">
           <motion.div variants={textVariant()} className="text-center">
@@ -81,8 +81,6 @@ const Home = () => {
               >
                 {data}
               </motion.p>
-
-              {/* <div className=""> */}
                 <button
                   type="button"
                   className="text-white 
@@ -97,21 +95,6 @@ const Home = () => {
                 >
                   New Fact
                 </button>
-
-                {/* <Link to="/" target="_blank" rel="noopener noreferrer">
-                  <button
-                    type="button"
-                    className="text-white
-                  bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
-                  hover:bg-gradient-to-br            
-                 font-medium 
-                  rounded-lg text-sm px-5 py-2.5 
-                  text-center me-2 mb-2 inline-flex items-center justify-center w-40"
-                  >
-                    Browse More +
-                  </button>
-                </Link> */}
-              {/* </div> */}
             </div>
           </div>
         </div>
