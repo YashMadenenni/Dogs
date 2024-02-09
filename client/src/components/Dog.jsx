@@ -173,8 +173,10 @@ const Dog = () => {
       </motion.section>
         )
       ) : (
-        <div className="h-screen"> 
-          "Loading..."
+        <div className="flex h-screen">
+          <div className=" m-auto"> 
+          Loading...
+        </div>
         </div>
       )}
       
