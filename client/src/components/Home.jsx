@@ -45,7 +45,7 @@ const Home = () => {
         <span className='hash-span' id="create">
           &nbsp;
         </span>
-    <section className="relative w-full h-screen mx-auto">
+    <section className="relative w-full h-[600px] sm:h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 
       inset-0 max-w-7xl `}
@@ -77,7 +77,7 @@ const Home = () => {
               </motion.div>
               <motion.p
                 variants={fadeIn("left", " spring", 0.5, 1.5)}
-                className=" h-90 p-5 shadow-xl my-auto justify-center text-[25px] text-[#e57926] font-medium lg:text-[25px] sm:text-[20px] xs:text-[15px] lg:leading-[40px] "
+                className=" h-90 p-5 shadow-xl my-auto justify-center text-[18px] text-[#e57926] font-medium sm:text-[20px]  lg:leading-[40px] "
               >
                 {data}
               </motion.p>
@@ -90,7 +90,7 @@ const Home = () => {
                   hover:bg-gradient-to-br            
                   font-medium 
                   rounded-lg text-sm px-5 py-2.5 
-                  text-center me-2 mb-2 inline-flex items-center justify-center w-40"
+                  text-center sm:mx-0 inline-flex items-center justify-center w-40 mx-auto"
                   onClick={() => {
                     setButtonClicked(true);
                   }}
