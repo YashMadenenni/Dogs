@@ -162,7 +162,8 @@ if (!isEdit) {
 
 //Preview file
   var loadFile = function (event) {
-    var input = event.target;
+    try {
+      var input = event.target;
     var eventFile = input.files[0];
     // var reader = new FileReader();
 
@@ -182,6 +183,9 @@ if (!isEdit) {
           });
         console.log(typeof(file) )
             // };
+    } catch (error) {
+      console.log(error)
+    }
 
     // reader.readAsDataURL(eventFile);
 };
@@ -323,7 +327,7 @@ if (!isEdit) {
                 name="image"
               id="preview_img"
               className=" h-96 w-96 object-cover rounded-3xl mt-10"
-              src={file}
+              src={dog4}
               alt="Preview"
             />
             <p className="text-black font-medium mt-3 ">Preview Image</p>
