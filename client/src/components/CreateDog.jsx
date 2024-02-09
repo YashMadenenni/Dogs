@@ -14,7 +14,7 @@ import { dog4, dog6 } from "../assets";
 import { staggerContainer } from "../utils/motion";
 import SearchDogs from "./SearchDogs";
 
-const CreateDog = ({ editDog, isEdit, handleDelete }) => {
+const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
   console.log(editDog);
   const formRef = useRef();
   //Image file Base64
@@ -149,6 +149,7 @@ const CreateDog = ({ editDog, isEdit, handleDelete }) => {
 
           if (response.ok) {
             window.alert("Success!");
+            setEditDog(false);
           } else {
             window.alert("Faild!");
           }
@@ -197,7 +198,7 @@ const CreateDog = ({ editDog, isEdit, handleDelete }) => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
-        className={` sm:p-20  max-w-7xl mx-auto relative z-0 `}
+        className={`  max-w-7xl m-auto relative z-0 `}
       >
         <span className="hash-span" id="create">
           &nbsp;
@@ -207,7 +208,7 @@ const CreateDog = ({ editDog, isEdit, handleDelete }) => {
           variants={slideIn("left", "tween", 0.2, 0.5)}
           className="flex 
         flex-col
-         bg-yellow-300 rounded-2xl  sm:p-8   mx-auto overflow-hidden my-24 "
+         bg-yellow-300 rounded-2xl mx-auto overflow-hidden "
         >
           
             <p
@@ -217,11 +218,11 @@ const CreateDog = ({ editDog, isEdit, handleDelete }) => {
             </p>
           
 
-          <div className="flex flex-col-reverse sm:flex-row  gap-6">
+          <div className="flex flex-col-reverse sm:flex-row gap-6 sm:mx-auto">
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="sm:mt-12 m-4 flex flex-col gap-6 sm:gap-4 sm:mx-auto"
+              className="sm:mt-12 m-4 flex flex-col gap-6 sm:gap-4 "
             >
               <label className="flex gap-2 sm:gap-0 sm:flex-col sm:w-96">
                 <span className="text-black font-medium sm:mb-2">
@@ -310,12 +311,12 @@ const CreateDog = ({ editDog, isEdit, handleDelete }) => {
                   className=" flex justify-between bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
            rounded-xl"
                 >
-                  <Link
-                    to={`/`}
+                  <button
+                    onClick={()=> setEditDog(false)}
                     className="w-fit py-4 px-8 outline-none text-white hover:text-black "
                   >
                     <FaArrowLeft className="text-[24px] " />
-                  </Link>
+                  </button>
                   <button
                     type="submit"
                     className=" w-fit py-3 px-8 outline-none text-white font-bold
@@ -343,11 +344,11 @@ const CreateDog = ({ editDog, isEdit, handleDelete }) => {
               <img
                 name="image"
                 id="preview_img"
-                className="h-40 w-40 sm:h-96 sm:w-96 object-cover rounded-3xl mt-10"
+                className="h-52 w-56 sm:h-96 sm:w-96 object-cover rounded-3xl sm:mt-10 mt-5"
                 src={file}
                 alt="Preview"
               />
-              <p className="text-black font-medium mt-3 ">Preview Image</p>
+              <p className="text-black font-light mt-3 ">Preview Image</p>
             </div>
           </div>
         </motion.div>

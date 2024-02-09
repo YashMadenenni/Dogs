@@ -33,7 +33,7 @@ const Dog = () => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [dogID]);
+  }, [dogID, editDog]);
 
   const getStars = (value) => {
     return (
@@ -78,23 +78,26 @@ const Dog = () => {
 
   return (
     <>
+    
       {dog ? (
         editDog ? (
           
-          <CreateDog editDog={dog} isEdit={true} handleDelete={handleDelete}/>
+          <CreateDog editDog={dog} isEdit={true} setEditDog={setEditDog} handleDelete={handleDelete}/>
           
         ) : (
+
           <motion.section
         variants={staggerContainer()}
         initial='hidden'
         whileInView='show'
         viewport={{ once: true, amount: 0.1}} 
-        className={`${styles.padding} sm:h-full h-screen w-full max-w-7xl mx-auto relative z-0 flex `}
+        className={` h-screen sm:p-0  sm:w-full max-w-7xl relative z-0 flex `}
       >
         <span className='hash-span' id="dog">
           &nbsp;
         </span>
-        <section className="flex sm:flex-row flex-col-reverse my-auto w-full sm:mb-56 ">
+        <div className="flex sm:flex-row flex-col-reverse m-auto   ">
+          
        
         <img
           className=" sm:block hidden  w-34 h-60 mt-auto ms-auto sm:-mb-28 -me-2"
@@ -103,11 +106,11 @@ const Dog = () => {
         />
         
 
-        <div className="  relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 me-auto float-start  ">
+        <div className="  relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 sm:me-auto mx-auto sm:mx-0">
           <img
             name="image"
             id="preview_img"
-            className="   sm:h-96 sm:w-96  object-fill sm:object-cover rounded-3xl"
+            className=" h-60 sm:h-96 sm:w-96  object-cover sm:object-cover rounded-3xl"
             src={dog.image_src}
             alt="Dog"
           />
@@ -166,12 +169,14 @@ const Dog = () => {
             </div>
           </form>
         </div>
-      </section>
+      </div>
       </motion.section>
         )
       ) : (
         "Loading..."
       )}
+      
+      
     </>
   );
 };
