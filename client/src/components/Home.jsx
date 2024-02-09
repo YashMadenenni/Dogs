@@ -42,7 +42,7 @@ const Home = () => {
         viewport={{ once: true, amount: 0.1}} // if condition as there is bug in works section if amount value is added more than 0.1
         className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
       >
-        <span className='hash-span' id="create">
+        <span className='hash-span' id="home">
           &nbsp;
         </span>
     <section className="relative w-full h-[750px] sm:h-screen mx-auto">
