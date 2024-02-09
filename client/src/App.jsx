@@ -13,6 +13,7 @@ const App = () => {
      <div className="relative z-0 bg-gradient-to-r from-amber-400  via-yellow-300 to-amber-400">
       <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/" element={<CreateDog />} />
           <Route path="/search/:dogID" element={<Dog />} />
           
         </Routes>

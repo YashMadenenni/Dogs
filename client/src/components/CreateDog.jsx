@@ -13,6 +13,7 @@ import Rating from "./Rating";
 import { dog4, dog6 } from "../assets";
 // import SearchDogs from "./SearchDogs";
 import { staggerContainer } from "../utils/motion";
+import SearchDogs from "./SearchDogs";
 
 
 
@@ -24,7 +25,7 @@ const CreateDog = ({editDog,isEdit,handleDelete}) => {
    const [file, setFile] = useState(null);
    
 
-   const [reloadChild, setReloadChild] = useState(false);
+   const [reloadChild, setReloadChild] = useState(true);
    
    // State to store rating values
    const [friendlyRating, setFriendlyRating] = useState(null);
@@ -126,9 +127,9 @@ if (!isEdit) {
 
   var newEditDog = {
     "_id":editDog._id,
-    "name":(form.breed.length >0 ? form.name+" "+form.breed:form.name),
-    "subcategory":(form.breed.length >0 ? true:false),
-    "breed":(form.breed.length >0 ? form.breed:null),
+    "name":form.breed?(form.breed.length >0 ? form.name+" "+form.breed:form.name):form.name,
+    "subcategory":form.breed?(form.breed.length >0 ? true:false):false,
+    "breed": form.breed?(form.breed.length >0 ? form.breed:null):null,
     "image_src": file,
     "details":"",
     "friendly": friendlyRating,
@@ -192,7 +193,7 @@ if (!isEdit) {
         variants={staggerContainer()}
         initial='hidden'
         whileInView='show'
-        viewport={{ once: true, amount: 0.1}} // if condition as there is bug in works section if amount value is added more than 0.1
+        viewport={{ once: true, amount: 0.1}} 
         className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
       >
         <span className='hash-span' id="create">
@@ -331,6 +332,7 @@ if (!isEdit) {
         </div>
       </motion.div>
     </div>
+    {!isEdit?<SearchDogs reloadChild={reloadChild}/> : ""}
     </motion.section>
     </>
   );

@@ -11,6 +11,7 @@ import {SectionWrapper} from "../hoc";
  import SearchDogs from "./SearchDogs";
 import CreateDog from "./CreateDog";
 import Navbar from "./Navbar";
+import { staggerContainer } from "../utils/motion";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -34,6 +35,16 @@ const Home = () => {
   return (
     <>
     <Navbar />
+    <motion.section
+        variants={staggerContainer()}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.1}} // if condition as there is bug in works section if amount value is added more than 0.1
+        className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
+      >
+        <span className='hash-span' id="create">
+          &nbsp;
+        </span>
     <section className="relative w-full h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 
@@ -106,13 +117,15 @@ const Home = () => {
         </div>
       </div>
     </section>
+
     <CreateDog />
-   
-   <SearchDogs />
+    
+    </motion.section>
+    
     
     </>
 
   );
 };
 
-export default SectionWrapper(Home,"home");
+export default Home

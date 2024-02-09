@@ -2,12 +2,14 @@ import { React, useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FaPaw, FaTrash, FaArrowLeft, FaPen } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-import { SectionWrapper } from "../hoc";
+import { staggerContainer } from "../utils/motion";
+// import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
 import { dog7 } from "../assets";
 import CreateDog from "./CreateDog";
-import EditDog from "./EditDog";
+
 
 
 // import Rating from "./Rating";
@@ -82,15 +84,26 @@ const Dog = () => {
           <CreateDog editDog={dog} isEdit={true} handleDelete={handleDelete}/>
           
         ) : (
-          
-        <section className="flex w-full ">
+          <motion.section
+        variants={staggerContainer()}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: true, amount: 0.1}} 
+        className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
+      >
+        <span className='hash-span' id="dog">
+          &nbsp;
+        </span>
+        <section className="flex w-full sm:mb-56">
+       
         <img
-          className=" absolute w-60 h-60 mt-auto ms-auto bottom-10 "
+          className="  w-34 h-60 mt-auto ms-auto -mb-28 -me-2"
           src={dog7}
           alt="Dog-pointing"
         />
+        
 
-        <div className="  relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 mx-auto float-start sm:mb-40 sm:my-10 ">
+        <div className="  relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 me-auto float-start  ">
           <img
             name="image"
             id="preview_img"
@@ -154,6 +167,7 @@ const Dog = () => {
           </form>
         </div>
       </section>
+      </motion.section>
         )
       ) : (
         "Loading..."
@@ -162,4 +176,4 @@ const Dog = () => {
   );
 };
 
-export default SectionWrapper(Dog, "dog");
+export default Dog
