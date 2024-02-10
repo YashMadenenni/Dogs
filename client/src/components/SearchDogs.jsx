@@ -126,7 +126,7 @@ const SearchDogs = ({ reloadChild }) => {
                        variants={  index < 20? fadeIn("up", "spring", index *0.1, 1): fadeIn("up", "spring", 1, 1)}
                         initial={`${initial?"hidden":""}`}
                       whileInView={`${initial?"show":""}`}
-                      className={`${index > limit - 1 ? "hidden" : ""} mx-auto drop-shadow-[9px_0px_6px_#80807E]`}
+                      className={`${index > limit - 1 ? "hidden" : ""} mx-auto drop-shadow-[9px_0px_6px_#494845]`}
                       key={index}
                     >
                       <Link
