@@ -50,7 +50,7 @@ const Home = () => {
         className={`${styles.paddingX} absolute 
       inset-0 max-w-7xl top-8 sm:top-0`}
       >
-        <div className="flex justify-center flex-col mt-5">
+        <div className="flex justify-center flex-col mt-10">
           <motion.div variants={textVariant()} className="text-center">
          
            <p className={`${styles.heroHeadText} drop-shadow-[9px_0px_5px_#000000a3] `}>Woof!</p>
@@ -64,7 +64,7 @@ const Home = () => {
               alt="user_image"
             >
               <img
-                className="sm:h-[450px] h-60 shadow-2xl rounded-t-full"
+                className="sm:h-[450px] h-60 shadow-2xl sm:rounded-t-full"
                 src={dog3}
                 alt="Dog"
               />

@@ -126,11 +126,11 @@ const SearchDogs = ({ reloadChild }) => {
                        variants={  index < 20? fadeIn("up", "spring", index *0.1, 1): fadeIn("up", "spring", 1, 1)}
                         initial={`${initial?"hidden":""}`}
                       whileInView={`${initial?"show":""}`}
-                      className={`${index > limit - 1 ? "hidden" : ""} mx-auto`}
+                      className={`${index > limit - 1 ? "hidden" : ""} mx-auto drop-shadow-[9px_0px_6px_#80807E]`}
                       key={index}
                     >
                       <Link
-                        className="flex flex-col sm:flex-row  my-3  rounded-3xl bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-600
+                        className="flex flex-col sm:flex-row  my-3  rounded-3xl bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-500
                         hover:bg-gradient-to-br"
                         to={`/search/${dog._id}`}
                       >
