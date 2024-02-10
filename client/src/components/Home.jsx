@@ -1,31 +1,28 @@
 import React from "react";
 import { styles } from "../styles";
 import { useEffect, useState } from "react";
-import { dog3 } from "../assets";
 import { motion } from "framer-motion";
-// import { Icon } from "@iconify/react";
+
+import { dog3 } from "../assets";
 import "../../src/index.css";
-// import { Link } from "react-router-dom";
-import { fadeIn, textVariant } from "../utils/motion";
+import { fadeIn, textVariant,staggerContainer } from "../utils/motion";
 import {SectionWrapper} from "../hoc";
- import SearchDogs from "./SearchDogs";
 import CreateDog from "./CreateDog";
 import Navbar from "./Navbar";
-import { staggerContainer } from "../utils/motion";
 
 const Home = () => {
-  const [data, setData] = useState(null);
-  const [buttonClicked, setButtonClicked] = useState(false);
-  const [initialrender, setInitialRender] = useState(true);
+  const [data, setData] = useState(null);// TO store fact data
+  const [buttonClicked, setButtonClicked] = useState(false);// To check if button clicked
+  const [initialrender, setInitialRender] = useState(true);//
 
+
+  //Fetch an random fact
   useEffect(() => {
     if (buttonClicked || initialrender) {
       fetch("https://dogapi.dog/api/v2/facts")
         .then((res) => res.json())
         .then((responsedata) => {
-          // setTimeout(() => {
           setData(responsedata.data[0].attributes.body);
-          // }, 1000);
           setButtonClicked(false);
           setInitialRender(false);
         });
@@ -34,7 +31,7 @@ const Home = () => {
 
   return (
     <>
-    <Navbar />
+    
     <motion.section
         variants={staggerContainer()}
         initial='hidden'
@@ -45,6 +42,7 @@ const Home = () => {
         <span className='hash-span' id="home">
           &nbsp;
         </span>
+        <Navbar />
     <section className="relative w-full h-[750px] sm:h-screen mx-auto">
       <div
         className={`${styles.paddingX} absolute 

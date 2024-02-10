@@ -3,8 +3,6 @@ import {
   CreateDog,
   Dog,
   Home,
-  Navbar,
-  SearchDogs
 } from './components'
 
 const App = () => {
