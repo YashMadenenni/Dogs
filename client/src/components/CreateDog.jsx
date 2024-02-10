@@ -170,6 +170,27 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
     }
   };
 
+  //To upload image to server before submitting form
+  var uploadImage = async (eventFile) => {
+    // event.preventDefault();
+    const formData = new FormData();
+    formData.append("file", eventFile);
+
+    const request = await fetch("/image", {
+      method: "POST",
+      body: formData,
+    });
+    const response = await request.json();
+    if (request.ok) {
+      window.alert("file uploaded");
+    } else {
+      window.alert("failed");
+    }
+    var imageUrl = response.url;
+    setFile(imageUrl)
+    console.log(imageUrl);
+  };
+
   var loadFile = function (event) {
     try {
       var input = event.target;
@@ -178,24 +199,27 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
 
       reader.onload = function () {
         // Read the file data and store it in a variable
-        // var fileData = reader.result;
-        // setFile(fileData);
+        var fileData = reader.result;
+        setFile(fileData);
 
         // Compress the file using Compressor.js
-        new Compressor(eventFile, {
-          quality: 0.6,
-          success: (compressedResult) => {
-            // Set the compressed file data in the React state
-            setFile(compressedResult);
-          },
-        });
+        // new Compressor(eventFile, {
+        //   quality: 0.6,
+        //   success: (compressedResult) => {
+        //     // Set the compressed file data in the React state
+        //     setFile(compressedResult);
+        //   },
+        // });
       };
 
       // Start reading the file
       reader.readAsDataURL(eventFile);
+
     } catch (error) {
       console.log(error);
     }
+
+    
   };
 
   return (
@@ -312,6 +336,7 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
                   name="image"
                   onChange={(e) => {
                     loadFile(e);
+                    uploadImage(e.target.files[0])
                   }}
                   className="block w-full text-sm text-slate-500
                         file:mr-4 file:py-2 file:px-4

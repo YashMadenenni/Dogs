@@ -12,20 +12,11 @@ const multer = require('multer');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Increase payload size limit (e.g., 10MB)
+
+// Increase payload size limit
 app.use(express.json({ limit: '20mb' }));
 
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, 'images'));
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
-
-const upload = multer({ storage: storage });
 
 const username = encodeURIComponent("yashwanthkumarms11");
 const password = encodeURIComponent("1TG4wd26QXsdPLu1"); // pswrd 1TG4wd26QXsdPLu1
@@ -35,8 +26,20 @@ const { ObjectId } = require('mongodb');
 
 // To serve Node the files for React app
 // app.use(express.static(path.resolve(__dirname, '../client/build'))); - for deployment on render
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../client')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
+//To set storage acess to  images and location for uploading images
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, '../server/images'));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 //MongoDB set up
 const url = `mongodb+srv://${username}:${password}@dogbreedcluster.zyybtvl.mongodb.net/?retryWrites=true&w=majority`
@@ -77,25 +80,6 @@ client.connect()
 
 
 
-// //fetch additional details of dogs
-// async function fetchAdditionalDetails(name) {
-//   try {
-//     const options = {
-//       uri: 'https://api.api-ninjas.com/v1/dogs',
-//       qs: { name: name },
-//       headers: {
-//         'X-Api-Key': '51Rzzg1tbx4pNrKXnO3+hQ==pqbnuf5QUC7puLfF'
-//       },
-//       json: true
-//     };
-
-//     const body = await request(options);
-//     return body;
-//   } catch (error) {
-//     console.error('Request failed:', error.message);
-//     throw error;
-//   }
-// }
 
 //To get images for dogs
 async function getDogImages(name, breedName) {
@@ -161,23 +145,14 @@ async function updateDogData() {
 //To upload image from client side
 app.post("/image",upload.single("file"),async function (req,res) {
   try {
-      console.log(req.file.path);
-      
-      console.log(path);
       const imagePath = path.join(req.file.path);
       imagePathCorrected = imagePath.split("\server")
-      console.log(imagePathCorrected[1])
-      // const imageUrl = req.file.path.replace("\\", "/");
-      // res.status(200).json({ url: `/${imageUrl}` });
       imageUrlfinal =  imagePathCorrected[1].replace(/\\/g, '/');
-      console.log(path.join(__dirname, '/images'))
-      res.set(200).json({url:imageUrlfinal})
+      console.log(path.join(__dirname, '../server/images'))
+      res.status(200).json({url:imageUrlfinal})
   } catch (error) {
-      res.set(400).json({url:""})
+      res.status(400).json({url:""})
   }
-  //console.log(imagePath);
-
-
 })
 
 
@@ -319,5 +294,5 @@ app.delete("/dog/:id", (request, response) => {
 
 // All other GET requests not handled before
 app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html')); //add /build for production
+  response.sendFile(path.resolve(__dirname, '../client', 'index.html')); //add /build for production
 });
