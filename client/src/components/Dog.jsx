@@ -104,7 +104,7 @@ const Dog = () => {
           
        
         <motion.img
-        variants={slideIn("up", "tween", 0.2, 0.5)}
+        variants={slideIn("left", "tween", 0.2, 0.5)}
           className=" sm:block hidden  w-34 h-60 mt-auto ms-auto sm:-mb-28 -me-2"
           src={dog7}
           alt="Dog-pointing"
@@ -112,7 +112,7 @@ const Dog = () => {
         
 
         <motion.div
-            variants={slideIn("right", "tween", 0.2, 0.5)}
+            variants={slideIn("down", "tween", 0.2, 0.5)}
         className="   relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 sm:me-auto mx-auto sm:mx-0">
           <img
             name="image"
