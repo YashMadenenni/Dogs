@@ -56,7 +56,7 @@ const Dog = () => {
   const handleDelete = (e) => {
     e.preventDefault();
 
-    fetch(`/deleteDog/${dogID}`, {
+    fetch(`/dog/${dogID}`, {
       method: "DELETE",
     })
       .then((response) => {

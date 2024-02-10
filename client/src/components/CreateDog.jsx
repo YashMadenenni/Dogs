@@ -93,7 +93,7 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
         security: securityRating,
       };
 
-      fetch("/addDog", {
+      fetch("/dog", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newDog),
@@ -145,7 +145,7 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
         security: securityRating,
       };
 
-      fetch(`/updateDog/${editDog._id}`, {
+      fetch(`/dog/${editDog._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newEditDog),

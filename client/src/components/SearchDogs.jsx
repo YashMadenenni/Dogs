@@ -25,7 +25,7 @@ const SearchDogs = ({ reloadChild }) => {
   }, [reloadChild]);
 
   const fetchAllDogs = () => {
-    fetch("/allDogs", {
+    fetch("/dog", {
       method: "GET",
     })
       .then((res) => res.json())

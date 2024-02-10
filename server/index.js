@@ -7,27 +7,25 @@ const API_PORT = process.env.PORT || 3001;
 const http_request = require('request-promise');
 const bodyParser = require('body-parser');
 const crypto = require("crypto");
-
-const app = express();
-
 const multer = require('multer');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, path.join(__dirname, 'images'));
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.originalname);
-    }
-  });
-
-const upload = multer({ storage: storage });
-
-
+const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Increase payload size limit (e.g., 10MB)
 app.use(express.json({ limit: '20mb' }));
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, 'images'));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 const username = encodeURIComponent("yashwanthkumarms11");
 const password = encodeURIComponent("1TG4wd26QXsdPLu1"); // pswrd 1TG4wd26QXsdPLu1
@@ -35,7 +33,7 @@ const password = encodeURIComponent("1TG4wd26QXsdPLu1"); // pswrd 1TG4wd26QXsdPL
 var { DogsBreedData } = require("./modifiedDogs");
 const { ObjectId } = require('mongodb');
 
-// Have Node serve the files for our built React app
+// To serve Node the files for React app
 // app.use(express.static(path.resolve(__dirname, '../client/build'))); - for deployment on render
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
@@ -57,7 +55,7 @@ const insertStarterDataBreeds = async function () {
 client.connect()
   .then(
     connection => {
-      //if collection is not present it is automatically created 
+
       collectionBreeds = client.db().collection("Breeds");
       console.log("Server: Connected to Database");
     }
@@ -99,6 +97,7 @@ client.connect()
 //   }
 // }
 
+//To get images for dogs
 async function getDogImages(name, breedName) {
   var name = name.toLowerCase().split(" ");
   var dogName = name[0];
@@ -126,15 +125,15 @@ async function getDogImages(name, breedName) {
 // Add additional details of dogs
 const dogData = {};
 
+//To update the dog data with fetched images @getDogImages
 async function updateDogData() {
   for (const dog of DogsBreedData) {
-    // console.log(dog.name);
+
     try {
       var image_src = await getDogImages(dog.name, dog.breed);
       var friendly = n = crypto.randomInt(1, 5);
       var activeness = n = crypto.randomInt(1, 5);
       var security = n = crypto.randomInt(1, 5);
-      // dog.image = image_src;
 
       const filter = { name: dog.name };
       const update = { $set: { image_src: image_src , friendly:friendly,activeness:activeness, security:security } };
@@ -152,16 +151,14 @@ async function updateDogData() {
         });
 
     } catch (error) {
-      // Handle errors or decide what to do if fetching details fails
+
       console.error('Error fetching details for', dog.name, error.message);
     }
   }
-
-  // Now you can use the updated dogData object as needed
-  // console.log(dogData);
+  
 }
 
-
+//To upload image from client side
 app.post("/image",upload.single("file"),async function (req,res) {
   try {
       console.log(req.file.path);
@@ -184,13 +181,8 @@ app.post("/image",upload.single("file"),async function (req,res) {
 })
 
 
-// Handle GET requests to /api route
-app.get("/api", (request, response) => {
-  response.json({ message: "Hello from server!" });
-});
-
 //Send all Dogs information
-app.get("/allDogs", (request, respone) => {
+app.get("/dog", (request, respone) => {
   
   collectionBreeds.find().toArray()
     .then(doc => {
@@ -235,7 +227,7 @@ function generateCustomId() {
       n = crypto.randomInt(0, 100000);
   } while (checkId(n));
 
-  return n;
+  return n;// return new integer number
 }
 
 // Find if the ID is already exists in DB 
@@ -249,7 +241,7 @@ function checkId(randomId) {
 
 //curl -X POST -H "Content-Type: application/json" -d '{"name":"NewDogName","subcategory":false,"breed":null,"image_src":"","details":""}' http://localhost:3001/addDog
 //To Add new Dog
-app.post("/addDog", (request, respone) => {
+app.post("/dog", (request, respone) => {
   const newDogData = request.body;
   const newDogName = request.body.name;
 
@@ -257,7 +249,7 @@ app.post("/addDog", (request, respone) => {
     .then(doc => {
       if (doc.length == 0) {
         const customId = generateCustomId();
-        // console.log(customId);
+
         // Create a new dog object with the custom ID
         const newDog = {
           _id: customId,
@@ -278,10 +270,10 @@ app.post("/addDog", (request, respone) => {
 });
 
 //Update an exsisting dog with ID
-app.put("/updateDog/:dogId", (request, response) => {
+app.put("/dog/:dogId", (request, response) => {
   const dogId = parseInt(request.params.dogId);
   const updateDogData = request.body;
-console.log(dogId);
+
   collectionBreeds.find({_id:dogId}).toArray()
   .then(doc =>{ 
     ((doc.length > 0)? console.log(doc) : console.log("Error"));
@@ -307,9 +299,8 @@ console.log(dogId);
 });
 
 // Delete a dog by ID
-app.delete("/deleteDog/:id", (request, response) => {
+app.delete("/dog/:id", (request, response) => {
  
-  console.log("Delete dog");
   const dogId = parseInt(request.params.id);
 
   collectionBreeds.deleteOne({ _id: dogId })
@@ -326,7 +317,7 @@ app.delete("/deleteDog/:id", (request, response) => {
     });
 });
 
-// // All other GET requests not handled before will return our React app
+// All other GET requests not handled before
 app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html')); //add build for production
+  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html')); //add /build for production
 });
