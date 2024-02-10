@@ -1,25 +1,31 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Compressor from "compressorjs";
-import { Link } from "react-router-dom";
 import { FaArrowLeft, FaTrash } from "react-icons/fa";
 
 import { styles } from "../styles";
 import { slideIn } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import Rating from "./Rating";
-import { dog4, dog6 } from "../assets";
-// import SearchDogs from "./SearchDogs";
+import { dog4 } from "../assets";
 import { staggerContainer } from "../utils/motion";
 import SearchDogs from "./SearchDogs";
 
-const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
-  console.log(editDog);
+/*@props to handle edit actions when redirected from edit button in dog.jsx
+@editDog dog to be editied
+@isEdit to validate if editing or creating
+@setEditDog toggle editing
+@handleDelete to handle deleting dog 
+*/
+const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
+  //to save form values when rendring
   const formRef = useRef();
-  //Image file Base64
+
+  //Image file
   const [file, setFile] = useState(null);
 
+  //to reload search results
   const [reloadChild, setReloadChild] = useState(true);
 
   // State to store rating values
@@ -27,8 +33,10 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
   const [activenessRating, setActivenessRating] = useState(null);
   const [securityRating, setSecurityRating] = useState(null);
 
+  //to set loader
   const [loading, setLoading] = useState(false);
 
+  //To Set the form with pre filled values from prop if in edit mode
   const [form, setForm] = useState(() => {
     if (isEdit) {
       let { name, breed, image_src, friendly, activeness, security } = editDog;
@@ -58,7 +66,7 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
   });
   console.log(form);
 
-  //Handle form value changes
+  //TO Handle form value changes
   const handleChange = (e) => {
     const { target } = e;
     const { name, value } = target;
@@ -66,14 +74,14 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
     setForm({ ...form, [name]: value });
   };
 
-  //Handle form submit
+  //TO Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
     setLoading(true);
 
-    //console.log(newDog);
     if (!isEdit) {
+      //Create Dog
       var newDog = {
         name: form.breed.length > 0 ? form.name + " " + form.breed : form.name,
         subcategory: form.breed.length > 0 ? true : false,
@@ -91,7 +99,6 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
         body: JSON.stringify(newDog),
       })
         .then((response) => {
-          // response.json();
           setLoading(false);
 
           if (response.ok) {
@@ -171,8 +178,9 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
 
       reader.onload = function () {
         // Read the file data and store it in a variable
-        var fileData = reader.result;
+        // var fileData = reader.result;
         // setFile(fileData);
+
         // Compress the file using Compressor.js
         new Compressor(eventFile, {
           quality: 0.6,
@@ -198,7 +206,9 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
-        className={`  max-w-7xl m-auto relative z-0 sm:px-32 px-2 pb-6 `}
+        className={`max-w-7xl m-auto 
+        relative z-0 
+        sm:px-32 px-2 pb-6 `}
       >
         <span className="hash-span" id="create">
           &nbsp;
@@ -208,15 +218,18 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
           variants={slideIn("left", "tween", 0.2, 0.5)}
           className="flex 
         flex-col
-         bg-yellow-300 rounded-2xl mx-auto overflow-hidden "
+         bg-yellow-300 
+         rounded-2xl 
+         mx-auto 
+         overflow-hidden "
         >
-          
-            <p
-              className={`${styles.sectionHeadText} drop-shadow-[9px_0px_5px_#000000a3] text-center mt-6`}
-            >
-              {isEdit ? "Edit" : "Submit Your Dog!"}
-            </p>
-          
+          <p
+            className={`${styles.sectionHeadText} 
+            drop-shadow-[9px_0px_5px_#000000a3] 
+            text-center mt-6`}
+          >
+            {isEdit ? "Edit" : "Submit Your Dog!"}
+          </p>
 
           <div className="flex flex-col-reverse sm:flex-row gap-6 sm:mx-auto">
             <form
@@ -235,11 +248,11 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
                   onChange={handleChange}
                   placeholder="Golden..."
                   className=" py-4 px-6 
-            placeholder:text-secondary 
-            text-black rounded-lg outlined-none
-            border-none font-medium
-            focus:outline-none 
-             "
+                  placeholder:text-secondary 
+                  text-black rounded-lg outlined-none
+                  border-none font-medium
+                  focus:outline-none 
+                  "
                   required
                 />
               </label>
@@ -255,11 +268,13 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
                   onChange={handleChange}
                   placeholder={!form.breed ? "Retriver..." : form.breed}
                   className=" py-4 px-6 
-            placeholder:text-secondary 
-            text-black rounded-lg outlined-none
-            border-none font-medium
-            focus:outline-none
-            "
+                  placeholder:text-secondary 
+                  text-black font-medium
+                  rounded-lg 
+                  outlined-none
+                  border-none 
+                  focus:outline-none
+                  "
                 />
               </label>
 
@@ -309,10 +324,10 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
               {isEdit ? (
                 <div
                   className=" flex justify-between bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
-           rounded-xl"
+                  rounded-xl"
                 >
                   <button
-                    onClick={()=> setEditDog(false)}
+                    onClick={() => setEditDog(false)}
                     className="w-fit py-4 px-8 outline-none text-white hover:text-black "
                   >
                     <FaArrowLeft className="text-[24px] " />
@@ -320,7 +335,7 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
                   <button
                     type="submit"
                     className=" w-fit py-3 px-8 outline-none text-white font-bold
-            shadow-md shadow-primary rounded-xl "
+                    shadow-md shadow-primary rounded-xl "
                   >
                     {loading ? "Editing..." : "Edit"}
                   </button>
@@ -332,9 +347,11 @@ const CreateDog = ({ editDog, isEdit,setEditDog, handleDelete }) => {
               ) : (
                 <button
                   type="submit"
-                  className=" w-fit py-3 px-8 outline-none text-white font-bold
-            shadow-md shadow-primary rounded-xl bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
-            hover:bg-gradient-to-br mx-auto"
+                  className=" w-fit py-3 px-8 
+                  outline-none text-white font-bold
+                  shadow-md shadow-primary rounded-xl 
+                  bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
+                  hover:bg-gradient-to-br mx-auto"
                 >
                   {loading ? "Submitting..." : "Submit"}
                 </button>

@@ -12,15 +12,15 @@ import { dog7 } from "../assets";
 import CreateDog from "./CreateDog";
 import { slideIn } from "../utils/motion";
 
-
-// import Rating from "./Rating";
-
 const Dog = () => {
   const formRef = useRef();
   const { dogID } = useParams();
+  //Dog Data
   const [dog, setDog] = useState(null);
+  //To set edit mode
   const [editDog, setEditDog] = useState(false);
 
+  //TO get dog using ID
   useEffect(() => {
     fetch(`/dog/${dogID}`, {
       method: "GET",
@@ -52,6 +52,7 @@ const Dog = () => {
     );
   };
 
+  //To handle deleting dog
   const handleDelete = (e) => {
     e.preventDefault();
 
@@ -71,16 +72,12 @@ const Dog = () => {
       });
   };
 
-  const handleEdit = (e) => {
-    e.preventDefault();
-    console.log(dog)
-    setEditDog(true);
-  };
 
   return (
     <>
-    
+    {/* check if data is loaded successfully */}
       {dog ? (
+        // check if in edit mode to display either dog or update dog
         editDog ? (
           
           <CreateDog editDog={dog} isEdit={true} setEditDog={setEditDog} handleDelete={handleDelete}/>
@@ -97,20 +94,17 @@ const Dog = () => {
         <span className='hash-span' id="dog">
           &nbsp;
         </span>
+
         <div 
-        
         className="flex sm:flex-row 
         flex-col-reverse m-auto   ">
-          
-       
         <motion.img
         variants={slideIn("left", "tween", 0.2, 0.5)}
           className=" sm:block hidden  w-34 h-60 mt-auto ms-auto sm:-mb-28 -me-2"
           src={dog7}
           alt="Dog-pointing"
         />
-        
-
+      
         <motion.div
             variants={slideIn("down", "tween", 0.2, 0.5)}
         className="   relative flex sm:flex-row flex-col  rounded-3xl bg-yellow-300  gap-8 sm:me-auto mx-auto sm:mx-0">
@@ -156,8 +150,9 @@ const Dog = () => {
             </label>
 
             <div
-              className=" flex justify-between bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
-           rounded-xl"
+              className=" flex justify-between 
+              bg-gradient-to-r from-amber-500 via-red-600 to-amber-700
+              rounded-xl"
             >
               <Link
                 to={`/`}
@@ -166,7 +161,7 @@ const Dog = () => {
                 <FaArrowLeft className="text-[24px] " />
               </Link>
 
-              <button onClick={(e) => handleEdit(e)}>
+              <button onClick={(e) => setEditDog(true)}>
                 <FaPen className="text-[24px] hover:cursor-pointer text-white me-2 hover:text-black " />
               </button>
 
