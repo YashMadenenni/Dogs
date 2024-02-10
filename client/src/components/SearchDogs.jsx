@@ -12,6 +12,7 @@ import {fadeIn} from "../utils/motion";
 
 import { staggerContainer } from "../utils/motion";
 import { styles } from "../styles";
+import { dog8, dog9 } from "../assets";
 
 const SearchDogs = ({ reloadChild }) => {
   const [dogs, setDogs] = useState(null);
@@ -95,6 +96,7 @@ const SearchDogs = ({ reloadChild }) => {
     var searchResult = dogs.filter((dog) => dog.name === newValue);
     setDogs(searchResult);
     newValue ? setValue(newValue) : fetchAllDogs();
+    setLoader(false);
   };
 
   return (
@@ -112,7 +114,9 @@ const SearchDogs = ({ reloadChild }) => {
               <span className="hash-span" id="search">
                 &nbsp;
               </span>
-              <div className=" sm:ms-auto mx-auto sm:mx-0 mb-8">
+              {/* <img src={dog9} alt="dog-search"  /> */}
+              <div className=" sm:ms-auto mx-auto sm:mx-0 mb-8 flex flex-col">
+                <img src={dog9} alt="dog-search" className=" w-36 mx-auto"  />
                 <ComboBox />
               </div>
               <ul className=" flex flex-wrap flex-row sm:justify-between gap-1 ">

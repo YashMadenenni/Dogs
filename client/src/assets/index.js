@@ -6,7 +6,10 @@ import dog4 from "./dog4.jpg";
 import dog5 from "./dog5.jpg";
 import dog6 from "./dog6.jpg";
 import dog7 from "./dog7.png";
+import dog8 from "./dog-sitting.png"
+import dog9 from "./dog-peeping.png"
+import dog10 from "./dog-sleeping.jpg"
 
 export {
-    dog1, dog2, dog3, dog3NB, dog4, dog5, dog6, dog7
+    dog1, dog2, dog3, dog3NB, dog4, dog5, dog6, dog7,dog8,dog9,dog10
 }
