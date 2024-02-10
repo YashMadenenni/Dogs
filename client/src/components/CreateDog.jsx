@@ -232,7 +232,7 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
         viewport={{ once: true, amount: 0.1 }}
         className={`max-w-7xl m-auto 
         relative z-0 
-        sm:px-32 px-2 pb-6 `}
+        sm:px-32 px-2 pb-6 ${isEdit? "sm:h-screen":""}`}
       >
         <span className="hash-span" id="create">
           &nbsp;
@@ -240,12 +240,12 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
 
         <motion.div
           variants={slideIn("left", "tween", 0.2, 0.5)}
-          className="flex 
+          className={`flex 
         flex-col
          bg-yellow-300 
          rounded-2xl 
          mx-auto 
-         overflow-hidden "
+         overflow-hidden  `}
         >
           <p
             className={`${styles.sectionHeadText} 
@@ -259,7 +259,7 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
             <form
               ref={formRef}
               onSubmit={handleSubmit}
-              className="sm:mt-12 m-4 flex flex-col gap-6 sm:gap-4 "
+              className="sm:mt-12 m-4 flex flex-col gap-6 sm:gap-2 "
             >
               <label className="flex gap-2 sm:gap-0 sm:flex-col sm:w-96">
                 <span className="text-black font-medium sm:mb-2">
