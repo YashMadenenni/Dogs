@@ -18,7 +18,16 @@ This project is a solution for a freelance web development test where the goal i
 `https://dogs-sfo8.onrender.com/`
 
 ## Screenshots:
-![Project Demo](/path/to/demo.gif)
+
+### Home Page
+![homepage](https://github.com/YashMadenenni/Dogs/blob/main/home-page.png)
+
+### Search Page
+![searchpage](https://github.com/YashMadenenni/Dogs/blob/main/search-page.png)
+
+### Submit Page
+![submitpage](https://github.com/YashMadenenni/Dogs/blob/main/submit-page.png)
+
 
 ## Technologies Used:
 - ⚛️ React
@@ -30,14 +39,16 @@ This project is a solution for a freelance web development test where the goal i
 ## Setup / Installation:
 To run the project locally, follow these steps:
 1. Clone the repository: 
-``
+```
 git clone https://github.com/YashMadenenni/Dogs.git
-``
+```
+2. Navigate to the project directory: ```cd Dogs```
+3. Install dependencies:
 
-2. Navigate to the project directory: `cd Dogs`
-3. Install dependencies: 
    - For frontend: `cd client && npm install`
+     
    - For backend: `cd server && npm install`
+     
 4. Build the frontend: `npm run build`
 5. Start the frontend server: `cd client && npm start`
 6. Start the backend server: `cd server && npm start`
