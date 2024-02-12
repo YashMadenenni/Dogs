@@ -1,6 +1,5 @@
 import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { SectionWrapper } from "../hoc";
 import { TextField, Autocomplete } from "@mui/material";
 import { motion } from "framer-motion";
 import { IconButton } from "@mui/material";
