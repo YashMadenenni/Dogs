@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { dog3 } from "../assets";
 import "../../src/index.css";
 import { fadeIn, textVariant,staggerContainer } from "../utils/motion";
-import {SectionWrapper} from "../hoc";
 import CreateDog from "./CreateDog";
 import Navbar from "./Navbar";
 
