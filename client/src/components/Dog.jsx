@@ -89,7 +89,7 @@ const Dog = () => {
         initial='hidden'
         whileInView='show'
         viewport={{ once: true, amount: 0.1}} 
-        className={` h-screen sm:p-0  sm:w-full max-w-7xl relative z-0 flex `}
+        className={` h-screen sm:p-0  sm:w-full max-w-7xl relative z-0 flex mx-auto`}
       >
         <span className='hash-span' id="dog">
           &nbsp;
