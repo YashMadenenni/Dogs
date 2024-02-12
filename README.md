@@ -63,6 +63,23 @@ to
 ```
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 ```
+
+**Error Handling:**  If you encounter any errors related to:
+```javascript
+Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options.allowedHosts[0] should be a non-empty string.
+```
+
+Remove the following line in client/package.json:
+```
+"proxy": "http://localhost:3001",
+```
+And add this line in front of all the fetch request in client/components:
+```
+http://localhost:3001
+```
+and ``concat http://localhost:3001 with imageUrl in CreateDog.jsx/uploadImage()``
+
 ## Approach:
 The project was approached by creating a full-stack web application using React for the frontend, Node.js and Express for the backend, and MongoDB as the database. The CRUD (Create, Read, Update, Delete) functionalities were implemented for managing dog entries. Tailwind CSS was used for styling to ease the development process. The choice of these technologies was motivated by the need to facilitate future scalability of the application.
 
