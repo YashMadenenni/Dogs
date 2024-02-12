@@ -6,7 +6,6 @@ import { FaArrowLeft, FaTrash } from "react-icons/fa";
 
 import { styles } from "../styles";
 import { slideIn } from "../utils/motion";
-import { SectionWrapper } from "../hoc";
 import Rating from "./Rating";
 import { dog4 } from "../assets";
 import { staggerContainer } from "../utils/motion";
