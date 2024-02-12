@@ -229,9 +229,9 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
-        className={`max-w-7xl m-auto 
+        className={`max-w-7xl mx-auto 
         relative z-0 
-         ${isEdit? "sm:h-screen ":"sm:px-32 px-2 pb-6"}`}
+         ${isEdit? "sm:h-screen flex w-ful":"sm:px-32 px-2 pb-6"}`}
       >
         <span className="hash-span" id="create">
           &nbsp;
@@ -244,7 +244,7 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
          bg-yellow-300 
          rounded-2xl 
          mx-auto 
-         overflow-hidden  `}
+         overflow-hidden my-auto `}
         >
           <p
             className={`${styles.sectionHeadText} 
@@ -385,7 +385,8 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
               <img
                 name="image"
                 id="preview_img"
-                className="h-52 w-56 sm:h-96 sm:w-96 object-cover rounded-3xl sm:mt-10 mt-5"
+                className="h-52 w-56 sm:h-96 sm:w-96 
+                object-cover rounded-3xl sm:mt-10 mt-5 mx-4"
                 src={file}
                 alt="Preview"
               />
