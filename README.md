@@ -81,7 +81,7 @@ And add this line in front of all the fetch request in client/components:
 ```
 http://localhost:3001
 ```
-and concat http://localhost:3001 with imageUrl in CreateDog.jsx/uploadImage(), line 188
+Additionally, concat http://localhost:3001 with imageUrl in CreateDog.jsx/uploadImage() to fix the issue of upload image due to change in proxy, line 188
 ```
 var imageUrl = "http://localhost:3001"+response.url;
 ```
