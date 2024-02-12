@@ -81,7 +81,10 @@ And add this line in front of all the fetch request in client/components:
 ```
 http://localhost:3001
 ```
-and ``concat http://localhost:3001 with imageUrl in CreateDog.jsx/uploadImage()``
+and concat http://localhost:3001 with imageUrl in CreateDog.jsx/uploadImage(), line 188
+```
+var imageUrl = "http://localhost:3001"+response.url;
+```
 
 ## Approach:
 The project was approached by creating a full-stack web application using React for the frontend, Node.js and Express for the backend, and MongoDB as the database. The CRUD (Create, Read, Update, Delete) functionalities were implemented for managing dog entries. Tailwind CSS was used for styling to ease the development process. The choice of these technologies was motivated by the need to facilitate future scalability of the application.
