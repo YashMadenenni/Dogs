@@ -12,7 +12,7 @@ import Navbar from "./Navbar";
 const Home = () => {
   const [data, setData] = useState(null);// TO store fact data
   const [buttonClicked, setButtonClicked] = useState(false);// To check if button clicked
-  const [initialrender, setInitialRender] = useState(true);//
+  const [initialrender, setInitialRender] = useState(true);// To check if its initial render
 
 
   //Fetch an random fact
