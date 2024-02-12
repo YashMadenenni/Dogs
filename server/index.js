@@ -8,10 +8,13 @@ const http_request = require('request-promise');
 const bodyParser = require('body-parser');
 const crypto = require("crypto");
 const multer = require('multer');
-
+const cors = require('cors');
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Enable CORS for all requests
+app.use(cors());
 
 // Increase payload size limit
 app.use(express.json({ limit: '20mb' }));
