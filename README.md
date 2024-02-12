@@ -54,8 +54,11 @@ git clone https://github.com/YashMadenenni/Dogs.git
 6. Start the backend server: `cd server && npm start`
 7. Open your browser and visit: `http://localhost:3000`
 
+**Note**
+The server's package.json is currently located in the root directory for simplicity during deployment, where it serves as the complete file. However, for improved file organization, it can be relocated to the ./server directory.
 
-**Note:** If you encounter any errors related to serving static files in the backend, make sure to update the server/index.js file. Change the following line:
+#### Error Handling
+**Error Handling:** If you encounter any errors related to serving static files in the backend, make sure to update the server/index.js file. Change the following line:
 ```javascript
 app.use(express.static(path.join(__dirname, '../client')));
 ```
