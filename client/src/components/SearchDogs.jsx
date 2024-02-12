@@ -43,8 +43,14 @@ const SearchDogs = ({ reloadChild }) => {
     setInitial(false);
     var searchResult = dogs.filter((dog) => dog.name === newValue);
     setDogs(searchResult);
-    newValue ? setValue(newValue) : fetchAllDogs();
-    setLoader(false);
+    if (newValue) {
+      setValue(newValue);
+      setLoader(false);
+    } else {
+      fetchAllDogs();
+      setLoader(true);
+    }
+    //  setLoader(false);
   };
 
   //Define Options for search
@@ -124,88 +130,46 @@ const SearchDogs = ({ reloadChild }) => {
                 className=" flex flex-wrap flex-row 
               sm:justify-between gap-1 "
               >
-                {dogs.length > 0 ? (
-                  dogs.map(
-                    (dog, index) =>
-                      (
-                        <motion.li
-                          variants={
-                            index < 20
-                              ? fadeIn("up", "spring", index * 0.1, 1)
-                              : fadeIn("up", "spring", 1, 1)
-                          }
-                          initial={`${initial ? "hidden" : ""}`}
-                          whileInView={`${initial ? "show" : ""}`}
-                          className={`${index > limit - 1 ? "hidden" : ""} 
+                {dogs.length >= 0 ? (
+                  dogs.map((dog, index) => (
+                    <motion.li
+                      variants={
+                        index < 20
+                          ? fadeIn("up", "spring", index * 0.1, 1)
+                          : fadeIn("up", "spring", 1, 1)
+                      }
+                      viewport={{ once: true, amount: 0.1 }}
+                      initial="hidden"
+                      whileInView="show"
+                      className={`${index > limit - 1 ? "hidden" : ""} 
                       mx-auto drop-shadow-[9px_0px_6px_#494845]`}
-                          key={index}
-                        >
-                          <Link
-                            className="flex flex-col sm:flex-row 
+                      key={index}
+                    >
+                      <Link
+                        className="flex flex-col sm:flex-row 
                          my-3  rounded-3xl 
                          bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-500
                         hover:bg-gradient-to-br"
-                            to={`/search/${dog._id}`}
-                          >
-                            <img
-                              className="sm:h-16 sm:w-16 h-16  
+                        to={`/search/${dog._id}`}
+                      >
+                        <img
+                          className="sm:h-16 sm:w-16 h-16  
                           object-cover rounded-3xl"
-                              src={dog.image_src}
-                              alt={dog.name}
-                            />
-                            <span
-                              className="text-white 
+                          src={dog.image_src}
+                          alt={dog.name}
+                        />
+                        <span
+                          className="text-white 
                         text-center font-medium text-sm 
                         w-28 py-2 mx-2"
-                            >
-                              {dog.name}
-                            </span>
-                          </Link>
-                        </motion.li>
-                      ) || (
-                        <button
-                          className="flex  gap-1  
-                    mx-auto 
-                    text-3xl text-red-500 hover:text-blue-500 
-                    underline"
-                          onClick={() => {
-                            limit < dogs.length
-                              ? setLimit(limit + 10)
-                              : setLoader(false);
-                          }}
                         >
-                          <p className="text-sm my-auto">Load more</p>
-                          <FaCloudDownloadAlt />
-                        </button>
-                      )
-                  )
+                          {dog.name}
+                        </span>
+                      </Link>
+                    </motion.li>
+                  ))
                 ) : (
-                  <li>
-                    <Link
-                      className="flex flex-wrap 
-                      my-3  
-                      rounded-3xl 
-                      bg-gradient-to-r from-amber-500 from-30% via-orange-400 to-yellow-600
-                      hover:bg-gradient-to-br"
-                      to={`/search/${dogs._id}`}
-                    >
-                      <img
-                        className="h-16 w-16 
-                        object-fit rounded-3xl"
-                        src={dogs.image_src}
-                        alt={dogs.name}
-                      />
-                      <span
-                        className="text-white 
-                      text-center 
-                      font-medium text-sm 
-                      w-28 py-2 mx-2"
-                      >
-                        {dogs.name}
-                      </span>
-                      )
-                    </Link>
-                  </li>
+                  <></>
                 )}
               </ul>
               {loader ? (
