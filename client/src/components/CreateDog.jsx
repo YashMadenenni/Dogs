@@ -229,9 +229,9 @@ const CreateDog = ({ editDog, isEdit, setEditDog, handleDelete }) => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
-        className={`flex max-w-7xl m-auto 
+        className={`max-w-7xl m-auto 
         relative z-0 
-         ${isEdit? "sm:h-screen":"sm:px-32 px-2 pb-6"}`}
+         ${isEdit? "sm:h-screen ":"sm:px-32 px-2 pb-6"}`}
       >
         <span className="hash-span" id="create">
           &nbsp;
