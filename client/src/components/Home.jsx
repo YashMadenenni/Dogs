@@ -20,7 +20,15 @@ const Home = () => {
     if (buttonClicked || initialrender) {
       fetch("https://dogapi.dog/api/v2/facts")
         .then((res) => res.json())
-        .catch((err) => setData("The most intelligent breed of dog is the Border Collie."))
+        .catch((err) => {
+          setData("The most intelligent breed of dog is the Border Collie.");
+          buttonClicked
+            ? (window.alert("Failed to fetch new fact"),
+              setData(
+                "Dogs’ nose prints are as unique as a human’s finger prints, and can be used to accurately identify them."
+              ))
+            : console.log(err);
+        })
         .then((responsedata) => {
           setData(responsedata.data[0].attributes.body);
           setButtonClicked(false);
