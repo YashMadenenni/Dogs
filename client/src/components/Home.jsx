@@ -20,6 +20,7 @@ const Home = () => {
     if (buttonClicked || initialrender) {
       fetch("https://dogapi.dog/api/v2/facts")
         .then((res) => res.json())
+        .catch((err) => setData("The most intelligent breed of dog is the Border Collie."))
         .then((responsedata) => {
           setData(responsedata.data[0].attributes.body);
           setButtonClicked(false);
